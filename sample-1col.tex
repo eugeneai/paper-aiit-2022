@@ -132,7 +132,7 @@ The basis of the proposed and by-component-evaluation tested is usage of a commo
 
 % Текст надо адаптировать к заджачам.
 The kernel module of applications is KG server (B2) built on the base of Virtuoso (the previous version was ClioPatria) with web-server and Pengines plug-ins~\cite{pengines}.  %ClioPatria is a web-application implemented in SWI-Prolog \cite{swi} being ISO-compliant Prolog implementation.  KG functions are implemented with SW package, supplied in standard SWI-Prolog distribution.
-Virtuoso, as compared to ClioPatria, supports \verb|UPDATE| and \verb|DELETE| \verb|SPARQL| queries, can be scaled in a network.  Pengines service enables SW web-applications to utilize logical inference on the server-side with browser JavaScript environment integration.  Pengine's knowledge base is extended with the programmer's Prolog modules~\cite{b10}.  The kernel module stores a common global part of A-~and T-boxes of applications, \emph{i.e.}, it is an application database.  Other modules provide an application (C3) that use other platform assets.
+Virtuoso, as compared to ClioPatria, supports \verb|UPDATE| and \verb|DELETE| \verb|SPARQL| queries, can be scaled in a network.  Pengines service enables SW web-applications to utilize logical inference on the server-side with browser JavaScript environment integration.  Pengine's knowledge base is extended with the programmer's Prolog modules~\cite{b10,swi}.  The kernel module stores a common global part of A-~and T-boxes of applications, \emph{i.e.}, it is an application database.  Other modules provide an application (C3) that use other platform assets.
 
 Authoring tool (B1) \cite{authoring,zont19} is used to provide document generation, and integration.  This tool implements document content and structure inference in the browser utilizing templates and data from other web pages and websites providing LOD\footnote{Abbreviation of Linked Open Data} \cite{b1,c6} capabilities. The composed page can be stored in a KG as a set of triples and indexed in the text indexing module (C1).
 
@@ -140,7 +140,7 @@ Text indexing engine (C1)  provides a service for storing documents represented 
 
 BLOB stored documents having no markup (PDFs, scanned documents) usually contain valuable data to be revealed for application use.  The documents could be report data or scientific paper content, DJVU files, or raster images.  Data recognition is implemented in the PDF/text document processing module (C2), where data processing workers query the text indexing module for BLOB documents and add recognized text and high-order structure layers.  All obtained layers are stored in the database of C1, and data of general interest are to be converted in triples of KG.
 
-A generalized KG processing is being executed in the KB processing module (B3).  This component denotes a set of rules used to implement the validating and emergent semantics and analysis and synthesis of the new data, including resultant output.  Module A2 is the source of model data (design of domains, UML, problem statement, \emph{etc.}), which is converted and form the T-box of a KG.  The conversion is a kind of Model-driven architecture (MDA) implementation.  Transformation is carried out under the control of the platform model, describing a context of the conversion.  For example, in the case of software source code synthesis, the software platform model is used to implement model objects.
+A generalized KG processing is being executed in the KB processing module (B3).  This component denotes a set of rules used to implement the validating and emergent semantics and analysis and synthesis of the new data, including resultant output.  Module A2 is the source of model data (design of domains, UML, problem statement, \emph{etc.}), which is converted and form the T-box of a KG.  The conversion is a kind of Model-driven architecture (MDA) implementation \cite{b2}.  Transformation is carried out under the control of the platform model, describing a context of the conversion.  For example, in the case of software source code synthesis, the software platform model is used to implement model objects.
 
 The metadata processing module (A1) denotes the environment capabilities for expressing the semantics out of the data processing modules' output and the input data semantics.  It allows us to store resultant data in KG for further usage in module (B3) for problem-solving and decision-making.  Module A3 denotes external services and KG with valuable resources, \emph{e.g.}, DBPedia~\cite{b3} global objects.
 
@@ -192,7 +192,7 @@ The laboratory works are defined with two environments \verb|labworks| that setu
   \begin{rdfctx}{\rdfsetctx{list}{syll wpdd:itemList % Semantic web item list definition
        !wpdd:ExampleList !wpdd:CurrentAttestation !wpdd:ItemList}}
   \def\syllabus@worktype{wpdd:LaboratoryWork} % RDF type of itemsin in an extended Jinja
-}                                             % equation syntax        
+}                                             % equation syntax
 { % Executes at \end{...work}
   \luadirect{ syll.items:workValidation() } % Run [table] data validation
 \end{rdfctx} % End of a RDF context
@@ -259,7 +259,7 @@ Presently, the ISU schedule is compiled separately by each unit.  ISU institutes
 
 The program ``AUTO Schedule'' makes it possible to facilitate and automate the complex work of the schedule compilers as much as possible. The system helps to build, adjust easily and print the schedule in a convenient form  and visual documents. The difficulty lies in the fact that such a program does not allow integration with other university systems, that's why the user has to enter all the data about the educational process manually.  At the same time, all such data is stored in the ISU corporate information system <<1C:University>>. Therefore, the most convenient way of the integration would be an automatic downloading data about the educational process, forming the basis of a schedule compilation. Since the program ``AUTO Schedule`` has no open API, it does not allow downloading data about the educational process, the development of a system for scheduling with the possibility of the integration with the system <<1C:University>> is an actual task that could be done using the platform.
 
-The new scheduling program must load collected data from KG.  To achieve these requirements, one is to construct a knowledge-based system inferring data from KG contents.  The main source of the data are the curricula, faculty assignments to the courses, which also must be implemented, and institute resource descriptions, which have also somewhat dynamic nature.  
+The new scheduling program must load collected data from KG.  To achieve these requirements, one is to construct a knowledge-based system inferring data from KG contents.  The main source of the data are the curricula, faculty assignments to the courses, which also must be implemented, and institute resource descriptions, which have also somewhat dynamic nature.
 
 \section{Related implementations in other high schools}
 
@@ -269,7 +269,7 @@ Saint-Petersburg Electrotechnical University (ETU) developed a system for study 
 The system enables faculty enters the meaningful information in to a JSON-base storage by filling in forms.  Each document is represented as a JSON-structure.  Syllabi are generated into \LaTeX{} sources and processed into PDF.  Chair secretary obtains the PDFs and publish them a course home page.  The system is constantly developed in a department.  At present, faculty member roles and document flow is realized, \emph{e.g.}, the documents are verified by a role dealing with standard compliance.  The state of a document is presented in a user interface.  The system is capable to store arbitrary PDF documents and generate whole package of documents to present qualification authorities.
 
 Less improved generator is developed in National Research State Technical University (NRTU) \cite{nrtu} % https://eng.istu.edu/
-A server-based PHP application is loaded with curricula from well-known in Russia curriculum authoring program ``Shakhty'', presents a user interface to define formal parts of the syllabus, such as lecture topics, list of laboratory works, personal works and seminars with the distribution of study units between them.  At the final stage, a Word document in \verb|docx| format is generated.  It should be filled in with other data, namely, list of tests, exams questions, literature references, \emph{etc}.  
+A server-based PHP application is loaded with curricula from well-known in Russia curriculum authoring program ``Shakhty'', presents a user interface to define formal parts of the syllabus, such as lecture topics, list of laboratory works, personal works and seminars with the distribution of study units between them.  At the final stage, a Word document in \verb|docx| format is generated.  It should be filled in with other data, namely, list of tests, exams questions, literature references, \emph{etc}.
 
 The similar principle of helping teachers is in the base of Lan' book publisher \cite{lanbook}, but their system is oriented on an automation of electronic editions collecting for a syllabus.  The information system stores all the books structuring by domain tag set and delivers content to the user filtered by similar topics regarding the set of the previous chosen exemplars.
 
@@ -279,7 +279,7 @@ Googling the Russian part of the Internet results in more examples of syllabi ge
 
 At present stage of the research, we implemented a set of services on the base of a developed knowledge graph (Semantic web) based infrastructure.  The infrastructure's modules' processing is based on active use of metadata, distributed and remote semantic resources.  It enables us to construct our solution in a multiagent fashion, where agents are independent of each other, provide a common domain for data structure devising.
 
-Among the quite successive direction of our development are two subprojects we told about in this paper: 
+Among the quite successive direction of our development are two subprojects we told about in this paper:
 \begin{itemize}
     \item syllabus data structure recognition from PDF documents, and
     \item their generation using a new curriculum and the recognized data.
@@ -302,80 +302,55 @@ document.
 
 
 \begin{thebibliography}{99}
-\bibitem{tbl} T.~Berners-Lee, J.~Hendler, O.~Lassila.  The semantic web: A new form of web content that is meaningful to computers will unleash a revolution of new possibilities.  Scientific American, May 2001.
-\bibitem{swi} J.~Wielemaker, T.~Schrijvers, M.~Triska, T.~Lager. SWI-Prolog. Theory and Practice of Logic Programming, volume~12, No.~1-2, pp.~67--96, 2011, ISSN~1471-0684.
-
-% Pengines
-
 \bibitem{zh2020} Z. Stojanov, J. Stojanov, G. Jotanovic, D. Dobrilovic. Weighted networks in socio-technical systems: Concepts and challenges. CEUR-WS Proceedings of the 2nd International Workshop on Information, Computation, and Control Systems for Distributed Environments Irkutsk, Russia, July 6-7, 2020. p.~265--276.
-
-\bibitem{pengines} T.~Lager, J.~Wielemaker. Pengines: Web Logic Programming Made Easy.  Theory and Practice of Logic Programming, volume~14, No.~4-5, 2014, pp.~539--552. \doi{10.1017/S1471068414000192}
-
-% Pengines
-
-\bibitem{authoring} E.~Cherkashin, A.~Shigarov, V.~Paramonov, A.~Mikhailov, Digital archives supporting document content inference, Procs.  of 42-nd International Convention on Information and Communication Technology Electronics and Microelectronics (MIPRO), May 20–24, 2019.  pp. 1037-1042. \doi{10.23919/MIPRO.2019.8757196}
-
-% Вместе с SIBIRICON он ниже
-
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\bibitem{b1} Ch. Bizer, N. Heath, T. Berners-Lee, ``Linked data -- the story so
-  far,'' International Journal on Semantic Web and Information Systems.
-  2009. Vol. 5 (3). P. 1--22. \doi{10.4018/jswis.2009081901}.
-% LOD
-\bibitem{c6} N. Heino, S. Tramp, N. Heino, S. Auer, ``Managing web content using linked data principles – combining semantic structure with dynamic content syndication,'' Computer Software and Applications Conference (COMPSAC), 2011 IEEE 35th Annual. pp. 245 - 250.  \url{http://svn.aksw.org/papers/2011/COMPSAC_lod2.eu/public.pdf}
-% LOD
-\bibitem{b3}
-  J. Lehmann, R. Isele, M. Jakob, A. Jentzsch, D. Kontokostas, \textit{et al},
-  ``DBpedia -- a large-scale, multilingual knowledge base extracted from
-  Wikipedia,'' Semantic Web Journal. Vol. 6, No. 2, P. 167--195,
-  IOS Press (2015)
-% DBPedia
+\bibitem{kg} Hogan A., Blomqvist E., Cochez M., D’Amato C. \emph{et al}. Knowledge Graphs -- 2020 URL:\url{https://arxiv.org/abs/2003.02320v5} (access date: 12-Dec-2021)
+\bibitem{virtuoso} Erling O. Virtuoso, a Hybrid RDBMS/Graph Column Store // IEEE Data Eng. Bull. 2012. Vol. 35 -- pp.~3--8.
 \bibitem{b8}
-  J. Wielemaker, W. Beek, M. Hildebrand, J. Ossenbruggen, ``ClioPatria: A
-  SWI-Prolog infrastructure for the Semantic Web,'' Semantic Web.
+  J. Wielemaker, W. Beek, M. Hildebrand, J. Ossenbruggen, ClioPatria: A
+  SWI-Prolog infrastructure for the Semantic Web, Semantic Web.
   Vol. 7(5). P. 529--541 (2016) \doi{10.3233/SW-150191}
-% Cliopatria
-\bibitem{Shigarov_2016}
-A. Shigarov, V. Paramonov, P. Belykh, A. Bondarev, ``Rule-based canonicalization of arbitrary tables in spreadsheets,'' In: G. Dregvaite, R. Damasevicius (eds) Information and Software Technologies. ICIST 2016.
-% Заключение, рядом с {Shigarov_2017}
+\bibitem{tbl} T.~Berners-Lee, J.~Hendler, O.~Lassila.  The semantic web: A new form of web content that is meaningful to computers will unleash a revolution of new possibilities.  Scientific American, May 2001.
+\bibitem{pengines} T.~Lager, J.~Wielemaker. Pengines: Web Logic Programming Made Easy.  Theory and Practice of Logic Programming, volume~14, No.~4-5, 2014, pp.~539--552. \doi{10.1017/S1471068414000192}
 \bibitem{b10}
-  J. Wielemaker, G. Schreiber, B. Wielinga, ``Prolog-based infrastructure
-  for RDF: scalability and performance,'' In: D. Fensel, K. Sycara,
+  J. Wielemaker, G. Schreiber, B. Wielinga, Prolog-based infrastructure
+  for RDF: scalability and performance, In: D. Fensel, K. Sycara,
   J. Mylopoulos (eds) The Semantic Web -- ISWC 2003. ISWC 2003. Lecture
   Notes in Computer Science. Vol. 2870. Springer, Berlin,
   Heidelberg, 2003.
-% Это гдк Prolog и SW вместе фигурируют
-\bibitem{b13}
-  R. Kuć, M. Rogoziński, ``Mastering Elasticsearch - Second edition,'' Packet
-  Publishing. 372 p. (2015)
-% Эластик search (Раздел про платформу)
-\bibitem{Shigarov_2017}
-A. Shigarov, A. Mikhailov, ``Rule-based spreadsheet data transformation from arbitrary to relational tables,'' Information Systems, 71, (2017). \doi{10.1016/j.is.2017.08.004}
-% В заключении будет
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\bibitem{logtalk}Moura P. Programming Patterns for Logtalk Parametric Objects // In: Abreu, S., Seipel, D. (eds) Applications of Declarative Programming and Knowledge Management. INAP 2009. -- Lecture Notes in Computer Science -- Vol. 6547 -- Springer, Berlin, Heidelberg -- 2011. \doi{10.1007/978-3-642-20589-7_4}
-% Logtalk, ... parametrizes objects 
-
+\bibitem{swi} J.~Wielemaker, T.~Schrijvers, M.~Triska, T.~Lager. SWI-Prolog. Theory and Practice of Logic Programming, volume~12, No.~1-2, pp.~67--96, 2011, ISSN~1471-0684.
+\bibitem{authoring} E.~Cherkashin, A.~Shigarov, V.~Paramonov, A.~Mikhailov, Digital archives supporting document content inference, Procs.  of 42-nd International Convention on Information and Communication Technology Electronics and Microelectronics (MIPRO), May 20–24, 2019.  pp. 1037-1042. \doi{10.23919/MIPRO.2019.8757196}
 \bibitem{zont19} Cherkashin E., Shigarov A., Paramonov V. Representation of MDA transformation with logical objects // Procs. of International Multi-Conference on Engineering, Computer and Information Sciences (SIBIRCON) Novosibirsk, Russia -- 2019 -- pp.~0913--0918 \doi{10.1109/SIBIRCON48586.2019.8958008}
-% Здесь наша первая идея о authoring documents
-\bibitem{kg} Hogan A., Blomqvist E., Cochez M., D’Amato C. \emph{et al}. Knowledge Graphs -- 2020 URL:\url{https://arxiv.org/abs/2003.02320v5} (access date: 12-Dec-2021)
-% Книге о KG!
+\bibitem{b1} Ch. Bizer, N. Heath, T. Berners-Lee, Linked data -- the story so
+  far, International Journal on Semantic Web and Information Systems.
+  2009. Vol. 5 (3). P. 1--22. \doi{10.4018/jswis.2009081901}.
+\bibitem{c6} N. Heino, S. Tramp, N. Heino, S. Auer, Managing web content using linked data principles – combining semantic structure with dynamic content syndication, Computer Software and Applications Conference (COMPSAC), 2011 IEEE 35th Annual. pp. 245 - 250.  \url{http://svn.aksw.org/papers/2011/COMPSAC_lod2.eu/public.pdf}
+\bibitem{b13}
+  R. Kuć, M. Rogoziński, Mastering Elasticsearch - Second edition, Packet
+  Publishing. 372 p. (2015)
 \bibitem{b2} Cherkashin E., Terehin I., Paramonov V. New transformation approach for Model Driven Architecture // Proceedings of the 35th International Convention MIPRO, Opatija -- 2012 -- pp.~1082-1087.
-\bibitem{GT} Belghiat A., Bourahla M.. UML Class Diagrams to OWL Ontologies: A Graph Transformation based Approach // International Journal of Computer Applications -- Vol. 41 -- pp.~41-46.
-
-\bibitem{virtuoso} Erling O. Virtuoso, a Hybrid RDBMS/Graph Column Store // IEEE Data Eng. Bull. 2012. Vol. 35 -- pp.~3--8.
-
+\bibitem{b3}
+  J. Lehmann, R. Isele, M. Jakob, A. Jentzsch, D. Kontokostas, \textit{et al},
+  DBpedia -- a large-scale, multilingual knowledge base extracted from
+  Wikipedia, Semantic Web Journal. Vol. 6, No. 2, P. 167--195,
+  IOS Press (2015)
+\bibitem{logtalk}Moura P. Programming Patterns for Logtalk Parametric Objects // In: Abreu, S., Seipel, D. (eds) Applications of Declarative Programming and Knowledge Management. INAP 2009. -- Lecture Notes in Computer Science -- Vol. 6547 -- Springer, Berlin, Heidelberg -- 2011. \doi{10.1007/978-3-642-20589-7_4}
 \bibitem{ghs} A \LuaLaTeX{} class for authoring syllabi, URL:\href{https://github.com/eugeneai/syllabus} (access date: 10.10.2022)
-
 \bibitem{leti} ETU “LETI”, URL:\url{https://etu.ru/en/university/} (access date: 10.10.2022)
 \bibitem{nrtu} INRTU is a university with the best traditions\ldots, URL:\url{https://eng.istu.edu/} (access date: 10.10.2022)
 \bibitem{lanbook} LMS  Lan', URL:\url{} (in Russian) (access date: 10.10.2022)
+\bibitem{Shigarov_2016}
+A. Shigarov, V. Paramonov, P. Belykh, A. Bondarev, Rule-based canonicalization of arbitrary tables in spreadsheets, In: G. Dregvaite, R. Damasevicius (eds) Information and Software Technologies. ICIST 2016.
+\bibitem{Shigarov_2017}
+A. Shigarov, A. Mikhailov, ``Rule-based spreadsheet data transformation from arbitrary to relational tables,'' Information Systems, 71, (2017). \doi{10.1016/j.is.2017.08.004}
+% \bibitem{GT} Belghiat A., Bourahla M.. UML Class Diagrams to OWL Ontologies: A Graph Transformation based Approach // International Journal of Computer Applications -- Vol. 41 -- pp.~41-46.
 \end{thebibliography}
 
 \end{document}
 
 %%
 %% End of file
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
