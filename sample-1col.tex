@@ -8,6 +8,8 @@
 % hf,
 ]{ceurart}
 
+% AIIT'2022 Zrenjanin, TZFR
+
 %%
 %% One can fix some overfulls
 \sloppy
@@ -23,6 +25,7 @@
 %% end of the preamble, start of the body of the document source.
 \newcommand{\email}[1]{\texttt{#1}}
 \graphicspath{{pics/}}
+\providecommand{\LuaLaTeX}{Lua\LaTeX}
 
 \begin{document}
 
@@ -39,7 +42,7 @@
 
 %%
 %% The "title" command
-\title{Using knowledge graph based distributed infrastructure for processing educational documents}
+\title{Knowledge graph based distributed infrastructure for processing documents used for organizing education process}
 % Менять можно все, и заголовок.... мы тут сами по себе
 
 %%
@@ -63,7 +66,7 @@
 \begin{abstract}
   This paper deals with the application of early developed infrastructural components based on knowledge graph data representation and knowledge-based data processing to university course documents processing, authoring and providing with their data a future platform for organization of the educational process.
 
-  Main goal of the activity is to integrate static university facade data represented as educational program documentation with university infrastructure, e.g., library, schedule, various existing process planning systems already made by master students and university staff.
+  Main goal of the activity is to integrate static university facade data represented as educational program documentation with university infrastructure, \emph{e.g.}, library, schedule, various existing process planning systems already made by master students and faculty.
 \end{abstract}
 
 %%
@@ -73,7 +76,8 @@
   knowledge graph \sep
   logical inference \sep
   education process automation \sep
-  distributed data processing
+  distributed data processing \sep 
+  document authoring automation
 \end{keywords}
 
 %%
@@ -87,13 +91,14 @@
 
 \section{Introduction}
 
-University is a complex socio-technical system (STS) \cite{zh2020} comprising various components, which functioning is provided mostly by university staff and automation software.  Irkutsk state university (ISU) has quite normal (required) level of automation in the areas of accounting, education process planning, learning management, student state control, library data access with library information system (LIS).  The automation has an island character between areas of automation and institutions (institutes and their departments).  Some institutes of ISU develop localized software to solve their own problems and do not share results between ISU community, or adaptation efforts assessed as senseless. It seems that there is no such tradition.  Some solutions are implemented by a special department of Institute of Mathematics and Information Technologies (IMIT) of ISU on a request.  For example, during COVID-19 pandemics, IMIT supported Big blue button functioning for all departments of ISU, implemented Moodle modules for remote enrollment management.
+University is a complex sociotechnical system (STS) \cite{zh2020} comprising various components, which functioning is provided mostly by university staff and automation software.  Irkutsk state university (ISU) has quite normal (required) level of automation in the areas of accounting, education process planning, learning management, student state control, library data access with library information system (LIS).  The automation has an island character between areas of automation and institutions (institutes and their departments).  Some institutes of ISU develop localized software to solve their own problems and do not share results between ISU community; adaptation efforts are assessed as senseless. It seems that there is no such tradition as well.  Some solutions are implemented by a special department of Institute of Mathematics and Information Technologies (IMIT) of ISU on a request.  For example, during COVID-19 pandemics, IMIT supported Big Blue Button functioning for all departments of ISU, implemented Moodle modules for remote enrollment management.
 
 % syllabus - sillabi (pl.) = Рабочая прграмма дисциплины.
 % curriculum - curricula (pl.) = учебный план.
 % faculty - профессорско-преподавательский состав (ППС)
+% appraisal fund - ФОС
 
-To obey constantly rising requirements placed on a university functioning, some areas are still experiencing a lack of automation. One of the challenging problem is course documentation, such as syllabi, mediation with a curriculum. In a syllabus, in the case of contracting or changing the numbers of hours spent to lecture and laboratory works, teacher must reschedule the amounts by adding/removing topics or contracting/extending a topic content.  {\bf[Другой пример непростой задачи ДОБАВИТЬ]} The format of printing layout of the syllabi is altered every two years, and even unchanged content must be reconstructed.  Yet another task that has not yet been automated is to check the capabilities of the university library to supply printing editions for references of the syllabi, renew URL references to the electronic ones.  Another problem deals with educational process management.  There is no common system of class schedule planning and browsing, monitoring student progress, namely, the fact of attending a class and the obtained grades.  % Some departments have their localized solutions, which cannot be efficiently adapted.
+To obey constantly rising requirements placed on a university functioning, some areas are still experiencing a lack of automation. One of the challenging problem is course documentation, such as syllabi, mediation with a curriculum. In a syllabus, in the case of contracting or changing the numbers of hours spent to lecture and laboratory works, teacher must reschedule the amounts by adding/removing topics or contracting/extending a topic content.  The format of printing layout of the syllabi is altered every two years, and even unchanged content must be reconstructed.  Yet another task that has not yet been automated is to check the capabilities of the university library to supply printing editions for references of the syllabi, renew URL references to the electronic ones.  Another problem deals with educational process management.  There is no common system of class schedule planning and browsing, monitoring student progress, namely, the fact of attending a class and the obtained grades.  % Some departments have their localized solutions, which cannot be efficiently adapted.
 % Другой проблемой, которую требуется решить непосредственно по части организации учебного процесса, является отсутствие единой информационной системы, которая бы позволила просматривать расписание занятий, а также контролировать успеваемость студентов за счёт выставления оценок и отметок о посещаемости занятий. Важно отметить, что некоторыми учебными подразделениями такие проблемы уже решены. Но разработанные информационные системы адаптированы под характеристики конкретного учебного подразделения, что не позволяет использовать ту же систему в другом подразделении. Поэтому требуются такие программные продукты, которые могли бы использовать все институты и факультеты ИГУ для решения проблем организации учебного процесса.
 
 The abovementioned problems are solved by faculty manually using office automation software (Microsoft and LibreOffice), institute management staff develop recommendations and template documents to simplify and inspire faculty to proceed with authoring of the syllabi in time and result in a good quality documents (in all aspects).  The devised manually, class schedules are published on ISU site as soon as they formed.  In such circumstances, its reconstruction becomes inoperative.   %  Что касается задач представления расписания и контроля успеваемости студентов, такие задачи также часто решаются вручную при помощи продуктов Microsoft и LibreOffice, из-за чего  редактирование расписания занятий является неоперативным процессом, поскольку изменения будут отображаться студентам и преподавателям только после публикации документа на веб-сайте или на стенде института. При достаточном количестве человеческих ресурсов такого вида работы могут быть выполнены оперативно с низкой вероятностью возникновения ошибок.
@@ -106,13 +111,15 @@ Other two abovementioned problems of class scheduling and student progress monit
 % Это слишко детально для введения. Но дает мне понимание проблематики. Я не выкидываю твой труд, просто резюмирую.
 %Проблемы автоматизации представления расписания и контроля успеваемости также являются решаемыми задачами, хоть и далеко не простыми. На текущий момент во многих учебных подразделениях ИГУ расписание предоставляется только в файле Word или Excel. В таких файлах расписание занятий сортируется по студенческим группам, что влечёт трудности поиска занятий преподавателем. Расписание такого формата также неудобно просматривать с мобильных устройств. Стоит отметить, что во всех учебных подразделениях ИГУ расписание отличается своим представлением, поэтому при разработке системы требуется учитывать настраивающийся интерфейс, чтобы студенты и преподаватели не испытывали трудностей при просмотре расписания  и быстро привыкли к использованию приложений для расписания.
 
+% aaa,aaaa and other ....
+
 % Для контроля успеваемости студентов также требуется система, которая бы позволяла добавлять оценки как в течение учебного семестра за занятия, так и предназначалась для ввода данных об зачётах, экзаменах, курсовых работах и практиках. Немаловажно учитывать и посещаемость занятий студентами. Чаще всего такие данные заполняются преподавателем на обычном бумажном листе, информация с которого может далее быть перенесена вручную на электронные устройства для, например, расчёта в программе Excel оценки или суммы баллов за учебный семестр.
 
 The aim of the present research presented in the paper is to automate these creative activities of the faculty authoring syllabi, organizing processes, monitoring and control, and in the future, form a basis of educational process modelling to support the compliance checking, individual education trajectories of students, compliance to domain of courses.
 
-\section{Short description of the platform}
+\section{Used development platform}
 
-The basis of the proposed and by component evaluation tested is usage of a common distributed warehousing driven by present semantic data servers, knowledge graph (KG) servers, such as Virtouso, ClioPatria, and adapting rational databases to Semantic Web (SW) technologies.  The usage of the distributed KGs allows us to develop subsystems independently, having in mind their facilities of coupling distributed data and services within common domains in a distributed network.  Using KG as data structures enables a developer to create software complexes as interacting agents via KGs' content, reaching loose coupling between them.  Another advantage of SW and KG usage is nowadays domain standardized descriptions represented as well-known vocabularies.  In Figure~\ref{fig:arch}, we presented an architecture used to develop our application and services.
+The basis of the proposed and by-component-evaluation tested is usage of a common distributed warehousing driven by present semantic data servers, knowledge graph (KG) servers, such as Virtouso \cite{virtuoso}, ClioPatria \cite{cliopatria}, and adapting rational databases to Semantic Web (SW) technologies.  The usage of the distributed KGs allows us to develop subsystems independently, having in mind their facilities of coupling distributed data and services within common domains in a distributed network.  Using KG as data structures enables a developer to create software complexes as interacting agents via KGs' content, reaching loose coupling between them.  Another advantage of SW and KG usage is nowadays domain standardized descriptions represented as well-known vocabularies.  In Figure~\ref{fig:arch}, we presented an architecture used to develop our application and services.
 
 \begin{figure}
 \centering
@@ -121,397 +128,163 @@ The basis of the proposed and by component evaluation tested is usage of a commo
 \label{fig:arch}
 \end{figure}
 
+% Текст надо адаптировать к заджачам.
+The kernel module of applications is KG server (B2) built on the base of Virtuoso \cite{virtuoso} (the previous version was ClioPatria \cite{cliopatria}) with web-server and Pengines plug-ins.  %ClioPatria is a web-application implemented in SWI-Prolog \cite{swi} being ISO-compliant Prolog implementation.  KG functions are implemented with SW package, supplied in standard SWI-Prolog distribution.  
+Virtuoso, as compared to ClioPatria, supports \verb|UPDATE| and \verb|DELETE| \varb|SPARQL| queries, can be scaled in a network.  Pengines service enables SW web-applications to utilize logical inference on the server-side with browser JavaScript environment integration.  Pengine's knowledge base is extended with the programmer's Prolog modules.  The kernel module stores a common global part of A-~and T-boxes of applications, \emph{i.e.}, it is an application database.  Other modules provide an application (C3) with services.
 
-
-
-\section{A general idea of the infrastructure application}
-
-
-
-
-Modifying the template --- including but not limited to: adjusting
-margins, typeface sizes, line spacing, paragraph and list definitions,
-and the use of the \verb|\vspace| command to manually adjust the
-vertical spacing between elements of your work --- is not allowed.
-
-\section{Template parameters}
-
-There are a number of template
-parameters which modify some part of the \verb|ceurart| document class.
-This parameters are enclosed in square
-brackets and are a part of the \verb|\documentclass| command:
-
-
-Frequently-used parameters, or combinations of parameters, include:
-\begin{itemize}
-\item \verb|twocolumn| : Two column layout.
-\item \verb|hf| : Enable header and footer\footnote{You can enable
-    the display of page numbers in the final version of the entire
-    collection. In this case, you should adhere to the end-to-end
-    pagination of individual papers.}.
-\end{itemize}
-
-The kernel module of applications is KG server (B2) built on the base of ClioPatria \cite{cliopatria} with web-server and Pengines plug-ins.  ClioPatria is a web-application implemented in SWI-Prolog \cite{swi} being ISO-compliant Prolog implementation.  KG functions are implemented with SW package, supplied in standard SWI-Prolog distribution.  Pengines service enables SW web-applications to utilize logical inference on the server-side \cite{pengines} with browser JavaScript environment integration.  Pengine's knowledge base is extended with the programmer's Prolog modules.  Kernel module stores a common global part of A-~and T-boxes of applications, \emph{i.e.}, it is application database.  Other modules provide an application (C3) with services.
-
-Authoring tool (B1) is used to provide document generation, and integration \cite{zont19}.  This tool enables document content and structure inference in the browser utilizing templates and data from other web pages and websites providing LOD\footnote{Abbreviation of Linked Open Data} \cite{lod} capabilities.  Programmer implements a view of an object as a web page with an extended version of RDFa.  The page is generated within any programming runtime, \emph{e.g.} PHP.  The authoring tool engine collects web page chunks and composes the document as an XHTML page.  This composed page can be stored in a KG as a set of triples and indexed in the text indexing module (C1), printed with the browser's printing engine, or converted to PDF.  The tool allows the user to change document content in WYSIWYG mode.  Its general structure is defined by changing the template on the server-side.
+Authoring tool (B1) is used to provide document generation, and integration \cite{zont19}.  This tool enables document content and structure inference in the browser utilizing templates and data from other web pages and websites providing LOD\footnote{Abbreviation of Linked Open Data} \cite{lod} capabilities. The composed page can be stored in a KG as a set of triples and indexed in the text indexing module (C1). 
 
 Text indexing engine (C1) provides a service for storing documents represented as KG triples, JSONs, and BLOBS of any format with corresponding text layers.  This module has two implementations.  One is built on the Sphinx Search engine, and the second is Elasticsearch.  Elasticsearch supports JSON as the only document format and is easily integrated with KG using JSON-LD for triple representation.  Sphinx Search is much faster in text and database records indexing and consumes less RAM as it is implemented in C++.  The choice of an engine depends on the primary document representation used in the application.
 
 BLOB stored documents having no markup (PDFs, scanned documents) usually contain valuable data to be revealed for application use.  The documents could be report data or scientific paper content, DJVU files, or raster images.  Data recognition is implemented in the PDF/text document processing module (C2), where data processing workers query the text indexing module for BLOB documents and add recognized text and high-order structure layers.  All obtained layers are stored in the database of C1, and data of general interest are to be converted in triples of KG.
 
-A generalized KG processing is being executed in the KB processing module (B3).  This component denotes a set of rules used to implement the validating and emergent semantics and analysis and synthesis of the new data, including resultant output.  Module A2 is the source of model data (design of domains, UML, problem statement, \emph{etc.}), which is converted and form the T-box of KG.  The conversion is a kind of Model-driven architecture (MDA) implementation.  Transformation is carried out under the control of the Platform model, describing a context of the conversion.  For example, in the case of software source code synthesis, the software platform model is used to implement model objects.
+A generalized KG processing is being executed in the KB processing module (B3).  This component denotes a set of rules used to implement the validating and emergent semantics and analysis and synthesis of the new data, including resultant output.  Module A2 is the source of model data (design of domains, UML, problem statement, \emph{etc.}), which is converted and form the T-box of KG.  The conversion is a kind of Model-driven architecture (MDA) implementation.  Transformation is carried out under the control of the platform model, describing a context of the conversion.  For example, in the case of software source code synthesis, the software platform model is used to implement model objects.
 
-The metadata processing module (A1) denotes the environment capabilities for expressing the semantics out of the data processing modules' output and the input data semantics.  It allows us to store resultant data in KG for further usage in module (B3) for problem-solving and decision-making.  Module A3 denote external services and KG with valuable resources, \emph{e.g.}, DBPedia global objects.
+The metadata processing module (A1) denotes the environment capabilities for expressing the semantics out of the data processing modules' output and the input data semantics.  It allows us to store resultant data in KG for further usage in module (B3) for problem-solving and decision-making.  Module A3 denotes external services and KG with valuable resources, \emph{e.g.}, DBPedia global objects.
 
+\section{Processing syllabi}
 
+As it was told above, the input consist of PDF documents of syllabi downloaded from the internet site of ISU.  The document should first be analyzed to obtain meaningful data, which can be processed imperatively.  For a syllabus, they are the title and the code of the course, list of topics, distribution of study units (academic hours) between lectures, practice, seminars, personal work of student, list of questions for knowledge assessment, \emph{etc}.
 
-\section{Front matter}
+The PDF processing is carried out by converting source PDF to XML by \verb|Poppler| library.  The XML file is processed by authors' set of utilities implemented as knowledge-based systems in Logtalk \cite{logtalk} object-oriented logical programming language.  Preliminary input data conversion represents XML tree (list of pages with lists of runs, lines and font definitions) into an in-object database, each element is numbered to conserve orders, neighborhood elements of the similar quality are marked to organize fast access to sequences of elements.
 
-\subsection{Title Information}
+The system recognizes basic features of each run and line, \emph{e.g.}, is it a hanging line of a paragraph, or does it have a number at the start of its text.  For all text lines of a page, we figure out the bounding box, excluding page numbers (one or two character strings at upper or lower edge of page with number that equal to the PDF page number). These features are used to join runs and rows into paragraphs, the bounding box is also used to figure out regular paragraph lines.  Each join is accompanied of figuring out paragraph geometry. Paragraphs, which were separated by page breaks, are reconstructed at the second stage, using different rules.  
 
-The titles of papers should be either all use the emphasizing
-capitalized style or they should all use the regular English (or
-native language) style. It does not make a good impression if you or
-your authors mix the styles.
+The next stage is syllabi structure recognition.  Each institute of ISU has templates for syllabi authoring, so that the sequences and styles of the headers are similar but varying between institutions.  The headers are recognized by their numbers in a template, verifying a sequence of roots of comprising words.  The template variations are accounted by specifying a \verb|categories| of special rules, adjusting parameters for general rules and adding special ones.  Then all lines/paragraphs are associated to the header preceding them.  The headers and subheaders are in hierarchical relations too.  So, at this stage, we have a tree of basic document structures.
 
-Use the \verb|\title| command to define the title of your work. Do not
-insert line breaks in your title.
+After constructing the hierarchy, the process of list recognition is launched.  We suppose that bullet lists have a deeper level of folding as compared to numbered ones.  The process has two stages: running through all list-like structures and find common sequences of constantly increasing numbers or same bullet symbols trying to conserve possible folding, and folding itself.  If a one-line list is found, this case is considered as a false positive list item, and it is joined to the previous paragraph as a regular line.  This rule recognizes, \emph{e.g.}, page numbers in references.  At this stage of R\&D we ignore description lists which lines start from a noun that follows a colon and other text.  
 
-\subsection{Title variants}
+The last stage is meaningful content acquisition.  At this stage, the data about header contexts and list folding are significant, they constrained the set of paragraphs, where meaningful data are located.  A location is specified with the context and a list of preceding word roots and punctuation. The target data is extracted with regular expressions or other string processing procedures.
 
+The main programming technique used in implementation of PDF documents analysis is object extension and composition.  The XML-data of a document is encapsulated as a parametric Logtalk object, which parameter is its path name.  The object provides basic input-output functions, conversion from a tree to the database, database content modification conserving consistency, debug printing, and so on.  It is extended to a recognition object (RO) by importing a set of \verb|categories| implementing analysis and synthesis stages, a set of configuration predicates are added as well.  RO is constructed aimed at a special case of syllabus template, so the imported categories are extended by descendants improving recognition capabilities.  As compared to the present component frameworks, configuration is realized with the same programming structures as a predicate implementation thanks to the abstract syntax of Prolog/Logtalk, and, moreover, configuration parameters also can be rules deducing values.
 
-\subsection{Authors and Affiliations}
+The extracted data are converted to a local KG, which added to the remote KG storing all syllabi data.  
 
-Each author must be defined separately for accurate metadata
-identification. Multiple authors may share one affiliation. Authors'
-names should not be abbreviated; use full first names wherever
-possible. Include authors' e-mail addresses whenever possible.
+\subsection{Authoring and generating syllabi}
 
-\verb|\author| command have the below options:
+Syllabi data stored in a KG are filled in \LuaLaTeX{} template based on a special class \verb|syllabus|, having special commands and environments for defining distributions of study units (hours) for various educational activities via keywords.  Let us consider an example of a list of laboratory works definitions expressed with special \LaTeX{} environments.
 
+\begin{minted}{latex}
+\begin{labworks}[comp={PC-4,PC-12}] % A "default" competence codes satisfied by these 
+                                    % set of laboratory works.
+. . .                               % The previous problem definitions
+\begin{work}[comp={PC-4}, % a competence satisfied by this work
+    hours=16,             % academic hours assigned for the task
+    topics={4},           % Lecture topic for the work
+    label=lw:distr]       % A LaTeX Reference label
+    {Construction of a distributed computational system} % The title of the work
+\paragraph{Problem definition:} Implement a cluster-based data processing according
+to ``Map-reduce'' scheme.
+\paragraph{Given} the results of the previous laboratory works.
+\paragraph{Devise} a network of interconnected services realizing data flow processing.
+\paragraph{Advanced level:} Organize a flow control with a RabbitMQ server.
+\end{work}
+\end{labworks}
+\end{minted}
+
+The laboratory works are defined with two environments \verb|labworks| that setups an enumeration environment and an RDF context for SW data acquisition, and \verb|work| defining a concrete problem definition.  Command \verb|\paragraph| is also redefined to support RDF data extraction.  The functionality of environments used is defined with so-called new \LaTeX{} extended syntax, allowing the programmer to control types of parameters. Here, we present an example of the environment definitions. Keyword processing are omitted as they contain too many details.  The current alpha version of class \verb|syllabus| is published at Github \ref{ghsyllabus}.  
+
+\begin{minted}{latex}
+\NewDocumentEnvironment{works}{O{}} % An extended synax environment definition with keywords
+{ % Rexecutes at \begin{...work}
+  \def\itemname{Student work} % A ``Student work'' tile placeholder
+  \begin{syll@items}[#1]  % Processing keywords by a private environment
+  \begin{rdfctx}{\rdfsetctx{list}{syll wpdd:itemList % Semantic web item list definition
+       !wpdd:ExampleList !wpdd:CurrentAttestation !wpdd:ItemList}}
+  \def\syllabus@worktype{wpdd:LaboratoryWork} % RDF type of items
+}
+{ % Executes at \end{...work}
+  \luadirect{ syll.items:workValidation() } % Run [table] data validation
+\end{rdfctx} % End of a RDF context
+\end{syll@items} % End of parent environment
+}
+
+\NewDocumentEnvironment{labworks}{O{}} % Specializes `works' environment
+{
+\syl@labwork@section % Starts section with name from a template adapter
+\begin{works}[totalnames={'hours'},
+  type=labwork,      % A kind of time units to account (labworkd, lectures ...)
+  itemname={Laboratory work},  % Set item naming ``Laboratory work N.''
+  rdftype={LaboratoryWork},#1]}% Set RDF type of items.
+{\end{works}}
+
+\NewDocumentEnvironment{work}{O{}m} % Define a work with a mandatory title
+{
+  \begin{syll@item}[#1]{#2} % Setup item with a parent assets
+  \begin{rdfenv}{list ^schema:member !wpdd:ListItem 
+     !wpdd:Example \luadirect{self.item:sprintRDFTypes()} }
+  \paragraph{{\workheaderstyle \itemname\ \theitem.}~{\worktitlestyle #2}}
+     % A format of the beginning of an item.
+}
+{
+\end{rdfenv}\par\vspace{1em} % Add an empty line between items
+\end{syll@item}
+}
+\end{minted}
+
+The environments execute \verb|Lua| code for collecting data, checking constraints and generating tables and other \TeX{} structures of a syllabus.  If constraints are not satisfied, an error message is added as red color text into the \TeX{} source.   The validation can be turned off by \verb|final| option to class (the \verb|draft| option forces check results to be included in the resulting PDF even it is correct).  Lua's code also generates auxiliary files with data that are to be processed between \verb|lualatex| tool runs.  
+
+The latter feature is used to check library capability to support printed editions, and renew URL references for electronic ones.  This service is implemented asynchronously using RabbitMQ server to organize workflows in LAN.  One of KG subgraphs stores editions' data (caching), and texts of the references are substituted.  Other collected data from \LaTeX{} markup of syllabi is sent to KG as well.
+
+The usage of \LuaLaTeX{} as the main text processing unit is dictated by its outstanding text layout quality capabilities, high-level markup by new commands and environments, True type font availability, and Lua support as an extension language allowing one to communicate with a parallel process in a convenient way.  Special command defined in class \verb|syllabus| restrict user with style change, also by defining useful new structures we can support development the documents with a common text structures representing various aspects of syllabus.  A typical example is tests, which can be integrated in a document and then be exported into a format understood by LMS Moodle.
+
+Initial state of a \LuaLaTeX{} syllabus representation is generated by Python and an RDF extended Jinja templating engine.  Jinja was improved with syntax structures allowing one to query KG or its local subgraph for triple data.  There are value-like queries with \verb|rdf:type| restrictions, and environments for answer set processing and a context definition.  Results of a template rendering also include a semantic markup invisible in the terminal PDF, but allowing one to untangle RDF data from \LuaLaTeX{} syllabi sources (alike RDFa for HTML).
+
+% TODO: in Conclusion say about RDFa to allow user knowing nothing about LaTeX.
+
+\section{Scheduling}
+
+Devising of the schedule is a well-known problem.  ISU requirements to the complexity of the solution are rater soft. This is because many requests for the schedule are difficult to formalize, and they are already considered during manual editing.  Since the schedule currently is not centralized compiled, but for each institute or faculty separately, it is necessary that the program generates a schedule at the same time for only one academic unit (institute).
+
+To form a schedule of a good quality (satisfying faculty and students' groups as well as possible, minimizing class resources), it is necessary to take into account a number of constraints, such as a ban on time intervals instead of classes, control of the capacity of classrooms, various requests of faculty, for example, on which days it is more convenient to conduct classes, the maximum number of classes per day, \emph{etc}.  Although it is not always possible to account all the requests for the schedule, the ISU requires a system that could make a preliminary version of the schedule with the possibility of a convenient manual editing.
+
+To devise a schedule, the constraints must be presented in a structured format that the system is capable to account and interpret.
+
+Thus, to account the limitations of the system for scheduling, it is necessary to use the following source data:
 \begin{itemize}
-\item \verb|style| : Style of author name (chinese)
-\item \verb|prefix| : Prefix
-\item \verb|suffix| : Suffix
-\item \verb|degree| : Degree
-\item \verb|role| : Role
-\item \verb|orcid| : ORCID
-\item \verb|email| : E-mail
-\item \verb|url| : URL
+    \item for classroom: the number of seats, the availability of a projector, computers, \etc{etc}.;
+    \item for faculty (preference and requests):
+    \begin{itemize}
+        \item number of working days per week;
+        \item maximum number of classes per day;
+        \item the desired schedule of classes during the school week (compact, evenly, no preference);
+    \end{itemize}
+    \item for student groups:
+    \begin{itemize}
+        \item academic load (the total number of academic hours in each discipline, as well as the number of classes per week);
+        \item number of students in their student group;
+        \item features of classes (streams, electives, \etc{etc});
+        \item last name, first name and patronymic of the teacher for each pair;
+        \item desired classroom for specific course class.
+    \end{itemize}    
 \end{itemize}
 
-Author names can have some kinds of marks and notes:
-\begin{itemize}
-\item affiliation mark: \verb|\author[<num>]|.
-\end{itemize}
+Presently, the ISU schedule is compiled separately by each unit.  ISU institutes make a schedule using Excel spreadsheets, or do it completely manually on a piece of paper. The software is also used in the scheduling process in some institutes. For example, at the Institute of Mathematics and Information Technologies of the ISU, the program ``AUTO Schedule'' is used for scheduling, which allows a user to work with schedules of varying degrees of complexity. At the same time, such a program can take into account the limitations listed above.
 
-The author names and affiliations could be formatted in two ways:
-\begin{enumerate}
-\item Group the authors per affiliation.
-\item Use an explicit mark to indicate the affiliations.
-\end{enumerate}
+The program ``AUTO Schedule'' makes it possible to facilitate and automate the complex work of the schedule compilers as much as possible. The system helps to build, adjust easily and print the schedule in a convenient form  and visual documents. The difficulty lies in the fact that such a program does not allow integration with other university systems, that's why the user has to enter all the data about the educational process manually.  At the same time, all such data is stored in the ISU corporate information system <<1C:University>>. Therefore, the most convenient way of the integration would be an automatic downloading data about the educational process, forming the basis of a schedule compilation. Since the program ``AUTO Schedule`` has no open API, it does not allow downloading data about the educational process, the development of a system for scheduling with the possibility of integration with the system <<1C:University>> is an actual task.
 
-Author block example:
+% Тут надо написать про фичи, которые нам очень нужны и их нет ни в 1С, ни в ВатоРасписании.
 
+\section{Related implementations in other high schools}
 
-\subsection{Abstract and Keywords}
+leti
 
-Abstract shall be entered in an environment that starts
-with \verb|\begin{abstract}| and ends with
-\verb|\end{abstract}|.
+istu syllabi generator and schedule constructor
 
+Lan' (or other ) syllabi generator
 
+\section*{Conclusion}
 
-The key words are enclosed in a \verb|keywords|
-environment. Use \verb|\sep| to separate keywords.
-
-
-
-At the end of front matter add \verb|\maketitle| command.
-
-\subsection{Various Marks in the Front Matter}
-
-The front matter becomes complicated due to various kinds
-of notes and marks to the title and author names. Marks in
-the title will be denoted by a star ($\star$) mark;
-footnotes are denoted by super scripted Arabic numerals,
-corresponding author by an Conformal asterisk (*) mark.
-
-\subsubsection{Title marks}
-
-Title mark can be entered by the command, \verb|\tnotemark[<num>]|
-and the corresponding text can be entered with the command
-\verb|\tnotetext[<num>]{<text>}|. An example will be:
-
-
-
-\verb|\tnotemark| and \verb|\tnotetext| can be anywhere in
-the front matter, but should be before \verb|\maketitle| command.
-
-\subsubsection{Author marks}
-
-Author names can have some kinds of marks and notes:
-\begin{itemize}
-\item footnote mark : \verb|\fnmark[<num>]|
-\item footnote text : \verb|\fntext[<num>]{<text>}|
-\item corresponding author mark : \verb|\cormark[<num>]|
-\item corresponding author text : \verb|\cortext[<num>]{<text>}|
-\end{itemize}
-
-\subsubsection{Other marks}
-
-At times, authors want footnotes which leave no marks in
-the author names. The note text shall be listed as part of
-the front matter notes. Class files provides
-\verb|\nonumnote| for this purpose. The usage
-
-and should be entered anywhere before the \verb|\maketitle|
-command for this to take effect.
-
-\section{Sectioning Commands}
-
-Your work should use standard \LaTeX{} sectioning commands:
-\verb|\section|, \verb|\subsection|,
-\verb|\subsubsection|, and
-\verb|\paragraph|. They should be numbered; do not remove
-the numbering from the commands.
-
-Simulating a sectioning command by setting the first word or words of
-a paragraph in boldface or italicized text is not allowed.
-
-\section{Tables}
-
-The ``\verb|ceurart|'' document class includes the ``\verb|booktabs|''
-package --- \url{https://ctan.org/pkg/booktabs} --- for preparing
-high-quality tables.
-
-Table captions are placed \textit{above} the table.
-
-Because tables cannot be split across pages, the best placement for
-them is typically the top of the page nearest their initial cite.  To
-ensure this proper ``floating'' placement of tables, use the
-environment \verb|table| to enclose the table's contents and the
-table caption. The contents of the table itself must go in the
-\verb|tabular| environment, to be aligned properly in rows and
-columns, with the desired horizontal and vertical rules.
-
-Immediately following this sentence is the point at which
-Table~\ref{tab:freq} is included in the input file; compare the
-placement of the table here with the table in the printed output of
-this document.
-
-\begin{table*}
-  \caption{Frequency of Special Characters}
-  \label{tab:freq}
-  \begin{tabular}{ccl}
-    \toprule
-    Non-English or Math&Frequency&Comments\\
-    \midrule
-    \O & 1 in 1,000& For Swedish names\\
-    $\pi$ & 1 in 5& Common in math\\
-    \$ & 4 in 5 & Used in business\\
-    $\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
-  \bottomrule
-\end{tabular}
-\end{table*}
-
-To set a wider table, which takes up the whole width of the page's
-live area, use the environment \verb|table*| to enclose the table's
-contents and the table caption.  As with a single-column table, this
-wide table will ``float'' to a location deemed more
-desirable. Immediately following this sentence is the point at which
-Table~\ref{tab:commands} is included in the input file; again, it is
-instructive to compare the placement of the table here with the table
-in the printed output of this document.
-
-\begin{table}
-  \caption{Some Typical Commands}
-  \label{tab:commands}
-  \begin{tabular}{ccl}
-    \toprule
-    Command &A Number & Comments\\
-    \midrule
-    \texttt{{\char'134}author} & 100& Author \\
-    \texttt{{\char'134}table}& 300 & For tables\\
-    \texttt{{\char'134}table*}& 400& For wider tables\\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\section{Math Equations}
-
-You may want to display math equations in three distinct styles:
-inline, numbered or non-numbered display.  Each of the three are
-discussed in the next sections.
-
-\subsection{Inline (In-text) Equations}
-
-A formula that appears in the running text is called an inline or
-in-text formula.  It is produced by the \verb|math| environment,
-which can be invoked with the usual
-\verb|\begin| \ldots \verb|\end| construction or with
-the short form \verb|$| \ldots \verb|$|. You can use any of the symbols
-and structures, from $\alpha$ to $\omega$, available in
-\LaTeX~\cite{Lamport:LaTeX};
-this section will simply show a few
-examples of in-text equations in context. Notice how this equation:
-\begin{math}
-  \lim_{n\rightarrow \infty} \frac{1}{n} = 0,
-\end{math}
-set here in in-line math style, looks slightly different when
-set in display style.  (See next section).
-
-\subsection{Display Equations}
-
-A numbered display equation---one set off by vertical space from the
-text and centered horizontally---is produced by the \verb|equation|
-environment. An unnumbered display equation is produced by the
-\verb|displaymath| environment.
-
-Again, in either environment, you can use any of the symbols and
-structures available in \LaTeX{}; this section will just give a couple
-of examples of display equations in context.  First, consider the
-equation, shown as an inline equation above:
-\begin{equation}
-  \lim_{n\rightarrow \infty} \frac{1}{n} = 0.
-\end{equation}
-Notice how it is formatted somewhat differently in
-the \verb|displaymath|
-environment.  Now, we'll enter an unnumbered equation:
-\begin{displaymath}
-  S_{n} = \sum_{i=1}^{n} x_{i} ,
-\end{displaymath}
-and follow it with another numbered equation:
-\begin{equation}
-  \lim_{x \to 0} (1 + x)^{1/x} = e
-\end{equation}
-just to demonstrate \LaTeX's able handling of numbering.
-
-\section{Figures}
-
-The ``\verb|figure|'' environment should be used for figures. One or
-more images can be placed within a figure. If your figure contains
-third-party material, you must clearly identify it as such, as shown
-in the example below.
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{sample-franklin}
-  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
-    Ewing, Inc. [Public domain], via Wikimedia
-    Commons. (\url{https://goo.gl/VLCRBB}).}
-\end{figure}
-
-Your figures should contain a caption which describes the figure to
-the reader. Figure captions go below the figure. Your figures should
-also include a description suitable for screen readers, to
-assist the visually-challenged to better understand your work.
-
-Figure captions are placed below the figure.
-
-\section{Citations and Bibliographies}
-
-The use of Bib\TeX{} for the preparation and formatting of one's
-references is strongly recommended. Authors' names should be complete
---- use full first names (``Donald E. Knuth'') not initials
-(``D. E. Knuth'') --- and the salient identifying features of a
-reference should be included: title, year, volume, number, pages,
-article DOI, etc.
-
-The bibliography is included in your source document with these two
-commands, placed just before the \verb|\end{document}|
-command:
-
-where ``\verb|bibfile|'' is the name, without the ``\verb|.bib|''
-suffix, of the Bib\TeX{} file.
-
-
-\subsection{Some examples}
-
-A paginated journal article \cite{Abril07}, an enumerated journal
-article \cite{Cohen07}, a reference to an entire issue
-\cite{JCohen96}, a monograph (whole book) \cite{Kosiur01}, a
-monograph/whole book in a series (see 2a in spec. document)
-\cite{Harel79}, a divisible-book such as an anthology or compilation
-\cite{Editor00} followed by the same example, however we only output
-the series if the volume number is given \cite{Editor00a} (so series
-should not be present since it has no vol. no.), a chapter in a
-divisible book \cite{Spector90}, a chapter in a divisible book in a
-series \cite{Douglass98}, a multi-volume work as book \cite{Knuth97},
-an article in a proceedings (of a conference, symposium, workshop for
-example) (paginated proceedings article) \cite{Andler79}, a
-proceedings article with all possible elements \cite{Smith10}, an
-example of an enumerated proceedings article \cite{VanGundy07}, an
-informally published work \cite{Harel78}, a doctoral dissertation
-\cite{Clarkson85}, a master's thesis: \cite{anisi03}, an online
-document / world wide web resource \cite{Thornburg01, Ablamowicz07,
-  Poker06}, a video game (Case 1) \cite{Obama08} and (Case 2)
-\cite{Novak03} and \cite{Lee05} and (Case 3) a patent
-\cite{JoeScientist001}, work accepted for publication \cite{rous08},
-prolific author \cite{SaeediMEJ10} and \cite{SaeediJETC10}. Other
-cites might contain `duplicate' DOI and URLs (some SIAM articles)
-\cite{Kirschmer:2010:AEI:1958016.1958018}. Multi-volume works as books
-\cite{MR781536} and \cite{MR781537}. A couple of citations with DOIs:
-\cite{2004:ITE:1009386.1010128,Kirschmer:2010:AEI:1958016.1958018}. Online
-citations: \cite{TUGInstmem, Thornburg01, R, UMassCitations}.
+% TODO: in Conclusion say about RDFa to allow user knowing nothing about LaTeX.
 
 \section{Acknowledgments}
-
+\begin{acknowledgments}
 Identification of funding sources and other support, and thanks to
 individuals and groups that assisted in the research and the
 preparation of the work should be included in an acknowledgment
 section, which is placed just before the reference section in your
 document.
-
-This section has a special environment:
-so that the information contained therein can be more easily collected
-during the article metadata extraction phase, and to ensure
-consistency in the spelling of the section heading.
-
-Authors should not prepare this section as a numbered or unnumbered
-\verb|\section|; please use the ``\verb|acknowledgments|'' environment.
-
-\section{Appendices}
-
-If your work needs an appendix, add it before the
-``\verb|\end{document}|'' command at the conclusion of your source
-document.
-
-Start the appendix with the ``\verb|\appendix|'' command:
-
-and note that in the appendix, sections are lettered, not
-numbered.
-
-%%
-%% The acknowledgments section is defined using the "acknowledgments" environment
-%% (and NOT an unnumbered section). This ensures the proper
-%% identification of the section in the article metadata, and the
-%% consistent spelling of the heading.
-\begin{acknowledgments}
-  Thanks to the developers of ACM consolidated LaTeX styles
-  \url{https://github.com/borisveytsman/acmart} and to the developers
-  of Elsevier updated \LaTeX{} templates
-  \url{https://www.ctan.org/tex-archive/macros/latex/contrib/els-cas-templates}.
 \end{acknowledgments}
-
-%%
-%% Define the bibliography file to be used
-\bibliography{sample-ceur}
-
-%%
-%% If your work has an appendix, this is the place to put it.
-\appendix
-
-\section{Online Resources}
-
-
-The sources for the ceur-art style are available via
-\begin{itemize}
-\item \href{https://github.com/yamadharma/ceurart}{GitHub},
-% \item \href{https://www.overleaf.com/project/5e76702c4acae70001d3bc87}{Overleaf},
-\item
-  \href{https://www.overleaf.com/latex/templates/template-for-submissions-to-ceur-workshop-proceedings-ceur-ws-dot-org/pkfscdkgkhcq}{Overleaf
-    template}.
-\end{itemize}
 
 \end{document}
 
