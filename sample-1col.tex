@@ -76,7 +76,7 @@
   knowledge graph \sep
   logical inference \sep
   education process automation \sep
-  distributed data processing \sep 
+  distributed data processing \sep
   document authoring automation
 \end{keywords}
 
@@ -129,10 +129,10 @@ The basis of the proposed and by-component-evaluation tested is usage of a commo
 \end{figure}
 
 % Текст надо адаптировать к заджачам.
-The kernel module of applications is KG server (B2) built on the base of Virtuoso \cite{virtuoso} (the previous version was ClioPatria \cite{cliopatria}) with web-server and Pengines plug-ins.  %ClioPatria is a web-application implemented in SWI-Prolog \cite{swi} being ISO-compliant Prolog implementation.  KG functions are implemented with SW package, supplied in standard SWI-Prolog distribution.  
+The kernel module of applications is KG server (B2) built on the base of Virtuoso \cite{virtuoso} (the previous version was ClioPatria \cite{cliopatria}) with web-server and Pengines plug-ins.  %ClioPatria is a web-application implemented in SWI-Prolog \cite{swi} being ISO-compliant Prolog implementation.  KG functions are implemented with SW package, supplied in standard SWI-Prolog distribution.
 Virtuoso, as compared to ClioPatria, supports \verb|UPDATE| and \verb|DELETE| \varb|SPARQL| queries, can be scaled in a network.  Pengines service enables SW web-applications to utilize logical inference on the server-side with browser JavaScript environment integration.  Pengine's knowledge base is extended with the programmer's Prolog modules.  The kernel module stores a common global part of A-~and T-boxes of applications, \emph{i.e.}, it is an application database.  Other modules provide an application (C3) with services.
 
-Authoring tool (B1) is used to provide document generation, and integration \cite{zont19}.  This tool enables document content and structure inference in the browser utilizing templates and data from other web pages and websites providing LOD\footnote{Abbreviation of Linked Open Data} \cite{lod} capabilities. The composed page can be stored in a KG as a set of triples and indexed in the text indexing module (C1). 
+Authoring tool (B1) is used to provide document generation, and integration \cite{zont19}.  This tool enables document content and structure inference in the browser utilizing templates and data from other web pages and websites providing LOD\footnote{Abbreviation of Linked Open Data} \cite{lod} capabilities. The composed page can be stored in a KG as a set of triples and indexed in the text indexing module (C1).
 
 Text indexing engine (C1) provides a service for storing documents represented as KG triples, JSONs, and BLOBS of any format with corresponding text layers.  This module has two implementations.  One is built on the Sphinx Search engine, and the second is Elasticsearch.  Elasticsearch supports JSON as the only document format and is easily integrated with KG using JSON-LD for triple representation.  Sphinx Search is much faster in text and database records indexing and consumes less RAM as it is implemented in C++.  The choice of an engine depends on the primary document representation used in the application.
 
@@ -148,24 +148,24 @@ As it was told above, the input consist of PDF documents of syllabi downloaded f
 
 The PDF processing is carried out by converting source PDF to XML by \verb|Poppler| library.  The XML file is processed by authors' set of utilities implemented as knowledge-based systems in Logtalk \cite{logtalk} object-oriented logical programming language.  Preliminary input data conversion represents XML tree (list of pages with lists of runs, lines and font definitions) into an in-object database, each element is numbered to conserve orders, neighborhood elements of the similar quality are marked to organize fast access to sequences of elements.
 
-The system recognizes basic features of each run and line, \emph{e.g.}, is it a hanging line of a paragraph, or does it have a number at the start of its text.  For all text lines of a page, we figure out the bounding box, excluding page numbers (one or two character strings at upper or lower edge of page with number that equal to the PDF page number). These features are used to join runs and rows into paragraphs, the bounding box is also used to figure out regular paragraph lines.  Each join is accompanied of figuring out paragraph geometry. Paragraphs, which were separated by page breaks, are reconstructed at the second stage, using different rules.  
+The system recognizes basic features of each run and line, \emph{e.g.}, is it a hanging line of a paragraph, or does it have a number at the start of its text.  For all text lines of a page, we figure out the bounding box, excluding page numbers (one or two character strings at upper or lower edge of page with number that equal to the PDF page number). These features are used to join runs and rows into paragraphs, the bounding box is also used to figure out regular paragraph lines.  Each join is accompanied of figuring out paragraph geometry. Paragraphs, which were separated by page breaks, are reconstructed at the second stage, using different rules.
 
 The next stage is syllabi structure recognition.  Each institute of ISU has templates for syllabi authoring, so that the sequences and styles of the headers are similar but varying between institutions.  The headers are recognized by their numbers in a template, verifying a sequence of roots of comprising words.  The template variations are accounted by specifying a \verb|categories| of special rules, adjusting parameters for general rules and adding special ones.  Then all lines/paragraphs are associated to the header preceding them.  The headers and subheaders are in hierarchical relations too.  So, at this stage, we have a tree of basic document structures.
 
-After constructing the hierarchy, the process of list recognition is launched.  We suppose that bullet lists have a deeper level of folding as compared to numbered ones.  The process has two stages: running through all list-like structures and find common sequences of constantly increasing numbers or same bullet symbols trying to conserve possible folding, and folding itself.  If a one-line list is found, this case is considered as a false positive list item, and it is joined to the previous paragraph as a regular line.  This rule recognizes, \emph{e.g.}, page numbers in references.  At this stage of R\&D we ignore description lists which lines start from a noun that follows a colon and other text.  
+After constructing the hierarchy, the process of list recognition is launched.  We suppose that bullet lists have a deeper level of folding as compared to numbered ones.  The process has two stages: running through all list-like structures and find common sequences of constantly increasing numbers or same bullet symbols trying to conserve possible folding, and folding itself.  If a one-line list is found, this case is considered as a false positive list item, and it is joined to the previous paragraph as a regular line.  This rule recognizes, \emph{e.g.}, page numbers in references.  At this stage of R\&D we ignore description lists which lines start from a noun that follows a colon and other text.
 
 The last stage is meaningful content acquisition.  At this stage, the data about header contexts and list folding are significant, they constrained the set of paragraphs, where meaningful data are located.  A location is specified with the context and a list of preceding word roots and punctuation. The target data is extracted with regular expressions or other string processing procedures.
 
 The main programming technique used in implementation of PDF documents analysis is object extension and composition.  The XML-data of a document is encapsulated as a parametric Logtalk object, which parameter is its path name.  The object provides basic input-output functions, conversion from a tree to the database, database content modification conserving consistency, debug printing, and so on.  It is extended to a recognition object (RO) by importing a set of \verb|categories| implementing analysis and synthesis stages, a set of configuration predicates are added as well.  RO is constructed aimed at a special case of syllabus template, so the imported categories are extended by descendants improving recognition capabilities.  As compared to the present component frameworks, configuration is realized with the same programming structures as a predicate implementation thanks to the abstract syntax of Prolog/Logtalk, and, moreover, configuration parameters also can be rules deducing values.
 
-The extracted data are converted to a local KG, which added to the remote KG storing all syllabi data.  
+The extracted data are converted to a local KG, which added to the remote KG storing all syllabi data.
 
 \subsection{Authoring and generating syllabi}
 
 Syllabi data stored in a KG are filled in \LuaLaTeX{} template based on a special class \verb|syllabus|, having special commands and environments for defining distributions of study units (hours) for various educational activities via keywords.  Let us consider an example of a list of laboratory works definitions expressed with special \LaTeX{} environments.
 
 \begin{minted}{latex}
-\begin{labworks}[comp={PC-4,PC-12}] % A "default" competence codes satisfied by these 
+\begin{labworks}[comp={PC-4,PC-12}] % A "default" competence codes satisfied by these
                                     % set of laboratory works.
 . . .                               % The previous problem definitions
 \begin{work}[comp={PC-4}, % a competence satisfied by this work
@@ -182,7 +182,7 @@ to ``Map-reduce'' scheme.
 \end{labworks}
 \end{minted}
 
-The laboratory works are defined with two environments \verb|labworks| that setups an enumeration environment and an RDF context for SW data acquisition, and \verb|work| defining a concrete problem definition.  Command \verb|\paragraph| is also redefined to support RDF data extraction.  The functionality of environments used is defined with so-called new \LaTeX{} extended syntax, allowing the programmer to control types of parameters. Here, we present an example of the environment definitions. Keyword processing are omitted as they contain too many details.  The current alpha version of class \verb|syllabus| is published at Github \ref{ghsyllabus}.  
+The laboratory works are defined with two environments \verb|labworks| that setups an enumeration environment and an RDF context for SW data acquisition, and \verb|work| defining a concrete problem definition.  Command \verb|\paragraph| is also redefined to support RDF data extraction.  The functionality of environments used is defined with so-called new \LaTeX{} extended syntax, allowing the programmer to control types of parameters. Here, we present an example of the environment definitions. Keyword processing are omitted as they contain too many details.  The current alpha version of class \verb|syllabus| is published at Github \ref{ghsyllabus}.
 
 \begin{minted}{latex}
 \NewDocumentEnvironment{works}{O{}} % An extended synax environment definition with keywords
@@ -211,7 +211,7 @@ The laboratory works are defined with two environments \verb|labworks| that setu
 \NewDocumentEnvironment{work}{O{}m} % Define a work with a mandatory title
 {
   \begin{syll@item}[#1]{#2} % Setup item with a parent assets
-  \begin{rdfenv}{list ^schema:member !wpdd:ListItem 
+  \begin{rdfenv}{list ^schema:member !wpdd:ListItem
      !wpdd:Example \luadirect{self.item:sprintRDFTypes()} }
   \paragraph{{\workheaderstyle \itemname\ \theitem.}~{\worktitlestyle #2}}
      % A format of the beginning of an item.
@@ -222,7 +222,7 @@ The laboratory works are defined with two environments \verb|labworks| that setu
 }
 \end{minted}
 
-The environments execute \verb|Lua| code for collecting data, checking constraints and generating tables and other \TeX{} structures of a syllabus.  If constraints are not satisfied, an error message is added as red color text into the \TeX{} source.   The validation can be turned off by \verb|final| option to class (the \verb|draft| option forces check results to be included in the resulting PDF even it is correct).  Lua's code also generates auxiliary files with data that are to be processed between \verb|lualatex| tool runs.  
+The environments execute \verb|Lua| code for collecting data, checking constraints and generating tables and other \TeX{} structures of a syllabus.  If constraints are not satisfied, an error message is added as red color text into the \TeX{} source.   The validation can be turned off by \verb|final| option to class (the \verb|draft| option forces check results to be included in the resulting PDF even it is correct).  Lua's code also generates auxiliary files with data that are to be processed between \verb|lualatex| tool runs.
 
 The latter feature is used to check library capability to support printed editions, and renew URL references for electronic ones.  This service is implemented asynchronously using RabbitMQ server to organize workflows in LAN.  One of KG subgraphs stores editions' data (caching), and texts of the references are substituted.  Other collected data from \LaTeX{} markup of syllabi is sent to KG as well.
 
@@ -256,7 +256,7 @@ Thus, to account the limitations of the system for scheduling, it is necessary t
         \item features of classes (streams, electives, \etc{etc});
         \item last name, first name and patronymic of the teacher for each pair;
         \item desired classroom for specific course class.
-    \end{itemize}    
+    \end{itemize}
 \end{itemize}
 
 Presently, the ISU schedule is compiled separately by each unit.  ISU institutes make a schedule using Excel spreadsheets, or do it completely manually on a piece of paper. The software is also used in the scheduling process in some institutes. For example, at the Institute of Mathematics and Information Technologies of the ISU, the program ``AUTO Schedule'' is used for scheduling, which allows a user to work with schedules of varying degrees of complexity. At the same time, such a program can take into account the limitations listed above.
@@ -285,6 +285,129 @@ preparation of the work should be included in an acknowledgment
 section, which is placed just before the reference section in your
 document.
 \end{acknowledgments}
+
+
+\begin{thebibliography}{99}
+\bibitem{tbl} T.~Berners-Lee, J.~Hendler, O.~Lassila.  The semantic web: A new form of web content that is meaningful to computers will unleash a revolution of new possibilities.  Scientific American, May 2001.
+
+\bibitem{hogan} A.~Hogan, E.~Blomqvist, M.~Cochez, C.~D’Amato \emph{et al}. Knowledge Graphs, 2020. URL:\url{https://arxiv.org/abs/2003.02320v5} (access date: 12-Dec-2021)
+
+\bibitem{zont19} E.~Cherkashin, A.~Shigarov, V.~Paramonov. Representation of MDA transformation with logical objects.  Procs. of International Multi-Conference on Engineering, Computer and Information Sciences (SIBIRCON), Novosibirsk, Russia, 2019, pp.~0913--0918 \doi{10.1109/SIBIRCON48586.2019.8958008}
+
+\bibitem{cliopatria} J.~Wielemaker, W.~Beek, M.~Hildebrand, J.~Ossenbruggen, ClioPatria: A SWI-Prolog infrastructure for the Semantic Web, Semantic Web, 2016, volume 7(5). pp.~529--541 \doi{10.3233/SW"=150191}
+
+\bibitem{swi} J.~Wielemaker, T.~Schrijvers, M.~Triska, T.~Lager. SWI-Prolog. Theory and Practice of Logic Programming, volume~12, No.~1-2, pp.~67--96, 2011, ISSN~1471-0684.
+
+\bibitem{pengines} T.~Lager, J.~Wielemaker. Pengines: Web Logic Programming Made Easy.  Theory and Practice of Logic Programming, volume~14, No.~4-5, 2014, pp.~539--552. \doi{10.1017/S1471068414000192}
+
+\bibitem{lod} C.~Bizer, T.~Heath, T.~Berners-Lee, Linked Data -- The Story So Far.  Int. J. Semantic Web Inf. Syst., volume~5, 2009, pp.~1--22. \doi{10.4018/jswis.2009081901}
+
+\bibitem{aicts2020} E.~Cherkashin, A.~Shigarov. Construction techniques of Baikal microbiome research information-computational environment.  Procs. of 1st International Workshop on Advanced Information and Computation Technologies and Systems. Irkutsk, Russia, December 7-11, 2020. CEUR-WS.org, URL:\url{http://ceur-ws.org/Vol-2858/paper2.pdf} (access date: 12-Dec-2021)
+
+\bibitem{authoring} E.~Cherkashin, A.~Shigarov, V.~Paramonov, A.~Mikhailov, Digital archives supporting document content inference, Procs.  of 42-nd International Convention on Information and Communication Technology Electronics and Microelectronics (MIPRO), May 20–24, 2019.  pp. 1037-1042. \doi{10.23919/MIPRO.2019.8757196}
+
+\bibitem{gisviewer} E.~Cherkashin, O.~Lunina, L.~Demyanov, A.~Tsygankov. Web-GIS viewer for active faults data represented as a knowledge graph.  Procs. of 4th Scientific-practical Workshop Information Technologies: Algorithms, Models, Systems. Irkutsk, Russia, September 14, 2021. CEUR-WS.org, URL:\url{http://ceur-ws.org/Vol-2984/paper8.pdf} (access date: 12-Dec-2021)
+
+\bibitem{lunina} O.~V.~Lunina.  The digital map of the Pliocene–Quaternary crustal faults in the Southern East Siberia and the adjacent Northern Mongolia.  Geodynamics \& Tectonophysics.  volume~7(3), 2016.  pp.~407-434. (in Russian) \doi{10.5800/GT-2016-7-3-0215}
+
+\bibitem{afs} A.~A.~Gladkov, O.~V.~Lunina. Cartographic service ``Activetectonics''. URL:\url{http://activetectonics.ru/} (access date: 20-Sep-2021)
+
+\bibitem{shigpaper} N.~O.~Dorodnykh, A.~Y.~Yurin, A.~O.~Shigarov. Conceptual Model Engineering for Industrial Safety Inspection Based on Spreadsheet Data Analysis.  In: Simian D., Stoica L. (eds) Modelling and Development of Intelligent Systems.  MDIS 2019.  Communications in Computer and Information Science, volume~1126, 2020, Springer, Cham. \doi{10.1007/978-3-030-39237-6_4}
+
+%\bibitem{foss} M.~Leidig, R.~Teeuw. Free software: A review, in the context of disaster management.  International Journal of Applied Earth Observation and Geoinformation, 42 (2015), pp.~49-56. \doi{10.1016/j.jag.2015.05.012}.
+
+%\bibitem{lgd} C.~Stadler, J.~Lehmann, K.~Höffner, S.~Auer. LinkedGeoData: A core for a web of spatial open data. Semantic Web 3 (2012) 333–354. \doi{10.3233/SW-2011-0052}
+
+%\bibitem{geolink} M.~Cheatham, A.~Krisnadhi, R.~Amini, P.~Hitzler, \emph{et al}. The GeoLink knowledge graph, Big Earth Data, 2:2 (2018), pp.~131-143. \doi{10.1080/20964471.2018.1469291}
+
+%\bibitem{abid} T.~Abid, H.~Zarzour. Integrating linked open data in a geographical information system.  Procs.  of. International Conference on Information Technology for Organization Development. Oct 19-20, 2014, University of Tebessa, Tebessa, Algeria (2014).
+
+%\bibitem{iwaniak1} A.~Iwaniak, I.~Kaczmarek, M.~Strzelecki, J.~Lukowicz, P.~Jankowski. Enriching and improving the quality of linked data with GIS. Open Geosciences, Vol.~8, 1~(2016) pp.~323-336. \doi{10.1515/geo-2016-0020}
+
+%\bibitem{iwaniak17} A.~Iwaniak, M.~Leszczuk, M.~Strzelecki, F.~Harvey, I.~Kaczmarek. A Novel Approach for Publishing Linked Open Geodata from National Registries with the Use of Semantically Annotated Context Dependent Web Pages.  International Journal of Geo-Information. 6, 252 (2017). \doi{10.3390/ijgi6080252}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibitem{b1} Ch. Bizer, N. Heath, T. Berners-Lee, ``Linked data -- the story so
+  far,'' International Journal on Semantic Web and Information Systems.
+  2009. Vol. 5 (3). P. 1--22. \doi{10.4018/jswis.2009081901}.
+\bibitem{c6} N. Heino, S. Tramp, N. Heino, S. Auer, ``Managing web content using linked data principles – combining semantic structure with dynamic content syndication,'' Computer Software and Applications Conference (COMPSAC), 2011 IEEE 35th Annual. pp. 245 - 250.  \url{http://svn.aksw.org/papers/2011/COMPSAC_lod2.eu/public.pdf}
+\bibitem{ontowiki} P. Frischmuth∗, M. Martin, \textit{et al}, ``OntoWiki – An Authoring, Publication andVisualization Interface for the Data Web,'' Semantic Web, No. 1, IOS Press, P.~1--5 (2012)
+\bibitem{b14}
+  S. Capadisli, A. Guy, R. Verborgh, C. Lange, S. Auer, T. Berners-Lee, ``Decentralised authoring, annotations and notifications for a read-write web with Dokieli,'' Procs of ICWE international conference, 5-8 June, 2017, Rome, Italy. p. 469--481 \doi{10.1007/978-3-319-60131-1_33}
+\bibitem{b2}
+  E. Cherkashin, P. Belykh, \textit{et al}. ``An approach to managing a site
+  content on the base of RDF technologies,'' Materials of All-Russian
+  conference with international participation "Knowledge -- Ontology --
+  Theory" (KONT-2013), 8 -- 10 October. Vol. 2. Novosibirsk.
+  Publishing house "AIC Price-courier" (2013)
+\bibitem{b3}
+  J. Lehmann, R. Isele, M. Jakob, A. Jentzsch, D. Kontokostas, \textit{et al},
+  ``DBpedia -- a large-scale, multilingual knowledge base extracted from
+  Wikipedia,'' Semantic Web Journal. Vol. 6, No. 2, P. 167--195,
+  IOS Press (2015)
+\bibitem{b4}
+  M. Krötzsch, ``How to use Wikidata: Things to make and do with 40 million
+  statements,'' In Keynote at the 10th Wikimania Conference. (2014).
+\bibitem{b5}
+  J. Daiber, M. Jakob, P. Mendes, ``Improving efficiency and accuracy in
+  multilingual entity extraction,'' Proceedings of the 9th International
+  conference on semantic systems (I-Semantics) (2013)
+\bibitem{b6}
+  M. Baiju, ``A Comprehensive Guide to Zope Component Architecture,''
+\url{http://muthukadan.net/docs/zca.html}. Last accessed 01 July 2017
+\bibitem{b7}
+  H. Langtangen, ``A primer on scientific programming with python (texts in
+  computational science and engineering)'' 3rd ed. Springer. 798 P. (2012)
+\bibitem{b8}
+  J. Wielemaker, W. Beek, M. Hildebrand, J. Ossenbruggen, ``ClioPatria: A
+  SWI-Prolog infrastructure for the Semantic Web,'' Semantic Web.
+  Vol. 7(5). P. 529--541 (2016) \doi{10.3233/SW-150191}
+\bibitem{b9}
+  T. Lager, J. Wielemaker, ``Pengines: Web logic programming made easy,''
+  Theory and Practice of Logic Programming. Vol. 14(4-5) (2014)
+DOI: \doi{10.1017/S1471068414000192}
+\bibitem{Shigarov_2016}
+A. Shigarov, V. Paramonov, P. Belykh, A. Bondarev, ``Rule-based canonicalization of arbitrary tables in spreadsheets,'' In: G. Dregvaite, R. Damasevicius (eds) Information and Software Technologies. ICIST 2016.
+\bibitem{b10}
+  J. Wielemaker, G. Schreiber, B. Wielinga, ``Prolog-based infrastructure
+  for RDF: scalability and performance,'' In: D. Fensel, K. Sycara,
+  J. Mylopoulos (eds) The Semantic Web -- ISWC 2003. ISWC 2003. Lecture
+  Notes in Computer Science. Vol. 2870. Springer, Berlin,
+  Heidelberg, 2003.
+% \bibitem{b11}
+%   Nefedova,Yu. S. The architecture of hybrid Recommender system GEFEST
+%   (Generation--Expansion--Filtering--Sorting--Truncation) // Systems and
+%   software of Informatics. 2012, vol. 22, issue.2, pp. 176--196.
+% \bibitem{b12}
+%   Beel J., Gripp B., Langer S., Breitinger C. Research-paper recommender
+%   systems: a literature survey // International Journal on Digital
+%   Libraries. 2016. Vol. 17. P. 305. doi:10.1007/s00799-015-0156-0.
+%   (access date - 12.12.2016)
+\bibitem{b13}
+  R. Kuć, M. Rogoziński, ``Mastering Elasticsearch - Second edition,'' Packet
+  Publishing. 372 p. (2015)
+\bibitem{Shigarov_2017}
+A. Shigarov, A. Mikhailov, ``Rule-based spreadsheet data transformation from arbitrary to relational tables,'' Information Systems, 71, (2017). \doi{10.1016/j.is.2017.08.004}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibitem{logtalk}Moura P. Programming Patterns for Logtalk Parametric Objects // In: Abreu, S., Seipel, D. (eds) Applications of Declarative Programming and Knowledge Management. INAP 2009. -- Lecture Notes in Computer Science -- Vol. 6547 -- Springer, Berlin, Heidelberg -- 2011. \doi{10.1007/978-3-642-20589-7_4}
+\bibitem{dataflow}Lee E. A., Messerschmitt D. G. Synchronous data flow // In Proceedings of the IEEE -- vol. 75, no. 9 -- pp. 1235-1245, -- 1987, \doi{10.1109/PROC.1987.13876}.
+\bibitem{zont19} Cherkashin E., Shigarov A., Paramonov V. Representation of MDA transformation with logical objects // Procs. of International Multi-Conference on Engineering, Computer and Information Sciences (SIBIRCON) Novosibirsk, Russia -- 2019 -- pp.~0913--0918 \doi{10.1109/SIBIRCON48586.2019.8958008}
+\bibitem{kg} Hogan A., Blomqvist E., Cochez M., D’Amato C. \emph{et al}. Knowledge Graphs -- 2020 URL:\url{https://arxiv.org/abs/2003.02320v5} (access date: 12-Dec-2021)
+\bibitem{azis}Rhazali Y., Hadi Y., Mouloudi A. Model Transformation with ATL into MDA from CIM to PIM Structured through MVC // Procedia Computer Science -- Vol. 83 -- 2016 -- pp. 1096–1101. \doi{10.1016/j.procs.2016.04.229}
+\bibitem{QVT} The MOF Query/View/Transformation Specification Version 1.1. URL:\url{http://www.omg.org/spec/QVT/1.1}
+\bibitem{nikita} Yurin A.Y., Dorodnykh N.O., Nikolaychuk O.A., Grishenko M.A. Designing rule-based expert systems with the aid of the model-driven development approach // Expert Systems -- 2018 -- 35:e12291. \doi{10.1111/exsy.12291}
+\bibitem{b2} Cherkashin E., Terehin I., Paramonov V. New transformation approach for Model Driven Architecture // Proceedings of the 35th International Convention MIPRO, Opatija -- 2012 -- pp.~1082-1087.
+\bibitem{GT} Belghiat A., Bourahla M.. UML Class Diagrams to OWL Ontologies: A Graph Transformation based Approach // International Journal of Computer Applications -- Vol. 41 -- pp.~41-46.
+
+% \bibitem{uml2owl} UMLtoOWL: Converter from UML to OWL. URL: \url{http://www.sfu.ca/~dgasevic/projects/UMLtoOWL/}.
+\bibitem{kuz}Кузнецов М.Б. Трансформация UML-моделей и ее использование в технологии MDA // Программирование -- Т. 33. № 1 -- 2007 -- С. 65--79.
+
+
+\end{thebibliography}
 
 \end{document}
 
