@@ -1,0 +1,16 @@
+/_minted-sample-1col+minted/
+/_minted-sample-1col/
+/_minted-sample-2col+minted/
+/auto/
+/pdfa.xmpi
+*.abs
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+/sample-1col+minted.xmpdata
+*.xmpdata
+/sample-2col+minted.pdf
+/sample-1col+minted.pdf
+/sample-2col.pdf
