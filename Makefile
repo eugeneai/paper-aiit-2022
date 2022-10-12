@@ -1,6 +1,6 @@
 # LATEX: pdflatex | xelatex | lualatex
 LATEX = lualatex
-LATEX_FLAGS = -shell-escape
+LATEX_FLAGS = -shell-escape -interaction nonstopmode
 BIBTEX = bibtex
 
 FILES = $(patsubst %.tex, %.pdf, $(wildcard *.tex))
@@ -11,10 +11,10 @@ all: $(FILES)
 %.pdf: %.tex
 	$(LATEX) $(LATEX_FLAGS) $<
 	$(LATEX) $(LATEX_FLAGS) $<
-	-$(BIBTEX) `basename $< .tex`
-	$(LATEX) $(LATEX_FLAGS) $<
-	$(LATEX) $(LATEX_FLAGS) $<
-	$(LATEX) $(LATEX_FLAGS) $<
+	% -$(BIBTEX) `basename $< .tex`
+	% $(LATEX) $(LATEX_FLAGS) $<
+	% $(LATEX) $(LATEX_FLAGS) $<
+	% $(LATEX) $(LATEX_FLAGS) $<
 	qpdf --linearize --newline-before-endstream $@ /tmp/$@
 	mv /tmp/$@ $@
 

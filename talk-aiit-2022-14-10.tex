@@ -116,174 +116,88 @@
 \setbeamertemplate{background canvas}[vertical shading][bottom=white,top=white]
 \setbeamercolor{background canvas}{bg=white}
 
-\title{Technologies of Semantic WEB as an environment of application development and integration}
+\title{Knowledge graph based distributed infrastructure for processing documents used for organizing education process}
 \author[E.~Cherkashin]{\bfseries%
-  Evgeny Cherkashin, Nikita Dorodnykh, Alexey Shigarov, \emph{et al.}}
+  Evgeny A. Cherkashin, Victoria A. Popova}
 \institute{\normalsize Matrosov Institute for System Dynamics and Control Theory of Siberian Branch of Russian Academy of Sciences, Irkutsk, Russia\\%
-  \email{\href{mailto:eugeneai@icc.ru}{eugeneai@icc.ru}}%
+  Institute of Mathematics and Information Technologies, Irkutsk State University, Irkutsk, Russia\\
+  \email{\href{mailto:eugeneai@icc.ru}{eugeneai@icc.ru}},\quad \email{\href{mailto:victorypopova1@gmail.com}{victorypopova1@gmail.com}}%
 }
-\date[2021]{AICTS'2021, December, 06, 2021 \\
-Irkutsk, Russia}
+\date[2021]{AIIT'2022, October, 14, 2022 \\
+Zrenjanin, Serbia}
 %\date{\today}
 \maketitle
 
 \begin{frame}
 \frametitle{Research and Development objectives}
-\textbf{Main objective} of the activity is to construct data integration tools based on the \textbf{standardized} Semantic WEB technologies.
-
-The following aspects are under consideration:
-  \begin{enumerate}
-  \item Application data representation
-  \item Ontological model representation
-  \item Document publication
-  \item Application integration % via knowledge graph data documents
-  \item Model transformation
-  \end{enumerate}
+Irkutsk state university (ISU) has quite normal (required) level of automation in the areas of
+\begin{itemize}
+\item accounting (``1C:Accounting for budget institutions''),
+\item education process planning (``1C:University''),
+\item learning management, student state control (``Moodle'')
+\item library data access with library information system (LMS ``Irbis-64'').
+\end{itemize}
+\textbf{BUT} other problems' automation has an \textbf{island character}.
+\begin{itemize}
+\item institutes of ISU develop software for local purposes,
+\item do not share results between ISU community;
+\item some solutions are implemented by a subdepartment IMIT of ISU on a request.
+\end{itemize}
+\textbf{Main objective} of the present research  is to creative activities of the faculty
+\begin{itemize}
+\item authoring syllabi,
+\item organizing processes, monitoring and control,
+\item form a basis of educational process modeling to support the
+  \begin{itemize}
+  \item ministry requirements compliance checking,
+  \item compliance to domain of courses,
+  \item individual education trajectories of students.
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Representation of ontological models}
-The ontologies are represented with \texttt{<subject,~predicate,~object>} \textbf{triples} as \textbf{graphs}, and there is frequently a \textbf{context}, the graph itself.
-\begin{columns}
-  \begin{column}{0.5\linewidth}
-    \includegraphics[width=\linewidth]{SPO.pdf}
-    \mbox{}\\[1em]
-    \includegraphics[width=\linewidth]{socrates-human.pdf}
-  \end{column}
-  \begin{column}{0.5\linewidth}
-    % Graph comprises
-    % \begin{itemize}
-    % \item T-Box
-    % \item {\color{blue}{A-Box}}
-    % \end{itemize}
-    The subjects, the predicates and \emph{some} objects are \textbf{URI/IRI}.
-    \emph{E.g.,} \texttt{http://purl.org/dc/terms/} defines the \textbf{namespace} ``\texttt{dc}''.\\[1ex]
-    \emph{Other} subjects are \textbf{literals}.\\[1ex]
-    All \textbf{XML} properties are applicable.
-    \begin{itemize}
-    \item XML format for data representation (optional!)
-    \item global identification
-    \item different specification usage in one document
-    \end{itemize}
-  \end{column}
-\end{columns}
+\frametitle{Syllabi authoring}
+One of the challenging problem is course documentation, such as syllabi, mediation the previous version with the current curriculum.  For a syllabi, following steps are to be performed:
+\begin{enumerate}
+\item Find a syllabus source at user's PC,
+\item Analyze actual curriculum, and find education unit (EU) distribution data, print/write it down,
+\item Recall the scenario of course teaching, add/remove/\textbf{comment} topics and laboratory work (LW) task set,
+\item Reconcile topics LW with exams question set an the set of competence,
+\item Fill in the results in the current template, upload \textbf{DOCX} to institute's cloud storage.
+\end{enumerate}
+
+As faculty varies, set of courses varies, EU distribution varies, \ldots, sources lost. We have to do with this!
+
+\textbf{Long term result is} a model of the education process.
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Blank nodes (BNodes)}
-  As one can use only triples, we cannot represent \texttt{P(s,o1,o2,\ldots)}. We have to split it on triples and join them via a \textbf{Blank Node} (BNode), which has no special IRI.
-  \begin{columns}
-    \begin{column}{0.5\linewidth}
-    \includegraphics[width=\linewidth]{bnode-ex.pdf}
-    \end{column}
-    \begin{column}{0.5\linewidth}
-\begin{minted}[fontsize=\tiny]{text}
-<http://example.org/web-data>
-  dc:title "Web Data" ;
-  ex:professor _:entity ;
-  ex:students _:students ;
-  ex:generatedBy _:activity1 .
+\begin{frame}
+  \frametitle{Schedule compilation and student progress monitoring}
+  Class scheduling and student progress monitoring have many aspects of consideration,
+  \begin{itemize}
+  \item a classic combinatorial optimization constraint satisfaction problem,
+  \item integration with education process planning software (``1C:University''),
+  \item Reconciling with other institutions occupying the same resources,
+  \item Accounting faculty requests and students' load,
+  \end{itemize}
+\vfil
+  \textbf{Long term result is} a model of the education process.
 
-_:entity
-  ex:fullName "Alice Carol" ;
-  ex:homePage <http://example.net/...
-  ex:hasAddress _:address .
-
-_:address
-  a ex:Address ;
-  ex:streetAddress "123 Main St." ;
-  ex:postalCode "A1A1A1" ;
-  ex:addressLocality "London" .
-
-_:students
-  a rdf:Bag ;
-  ex:hasMember _:s1 ;
-  ex:hasMember _:s2 .
-
-_:activity1
-  a ex:Event;
-  ex:creator _:entity ;
-  ex:atTime "Tuesday 11 February, 06:51:00 CST" .
-
-_:activity2
-  a ex:Event, ex:Update ;
-  ex:actionOver _:activity1 ;
-  ex:creator _:entity2 ;
-  ex:atTime "Monday 17 February, 08:12:00 CST" .
-\end{minted}
-    \end{column}
-  \end{columns}
+  % Data representation for students'
+  % \begin{itemize}
+  %   \item grades (formal and instructive),
+  %   \item compliance to educational trajectories, competence set,
+  %   \item creative solutions, and
+  %   \item formal tests.
+  % \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Data formats for graph representation}
-  \begin{columns}
-    \begin{column}{0.5\linewidth}
-\begin{itemize}
-\item N-Triples
-\begin{minted}[fontsize=\tiny]{text}
-<http://mythology.Greek.org/#Cronus>
-    <http://www.example.org/schemas/relationship/fatherOf>
-    <http://mythology.Greek.org/#Zeus>.
-\end{minted}
-\item Turtle
-\begin{minted}[fontsize=\tiny]{text}
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix ex: <http://example.org/stuff/1.0/> .
-<http://www.w3.org/TR/rdf-syntax-grammar>
-  dc:title "RDF/XML Syntax Specification (Revised)" ;
-  ex:editor [
-    ex:fullname "Dave Beckett";
-    ex:homePage <http://purl.org/net/dajobe/>
-  ] .
-\end{minted}
-\item Notation 3 (N3)
-\begin{minted}[fontsize=\tiny]{text}
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-<http://en.wikipedia.org/wiki/Tony_Benn>
-  dc:title "Tony Benn" ;
-  dc:publisher "Wikipedia" .
-\end{minted}
-\end{itemize}
-\end{column}
-\begin{column}{0.5\linewidth}
-\begin{itemize}
-\item RDF/XML
-\begin{minted}[fontsize=\tiny]{xml}
-<rdf:RDF
-    xmlns:rdf="http://www.w3.org/1999/02/
-               22-rdf-syntax-ns#"
-    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <rdf:Description rdf:about="http://en.wikipedia.org/
-                              wiki/Tony_Benn">
-    <dc:title>Tony Benn</dc:title>
-    <dc:publisher>Wikipedia</dc:publisher>
-  </rdf:Description>
-</rdf:RDF>
-\end{minted}
-\item JSON-LD
-\begin{minted}[fontsize=\tiny]{jsonld}
-{
-  "@context": {
-    "name": "http://xmlns.com/foaf/0.1/name",
-    "homepage": {
-      "@id": "http://xmlns.com/foaf/0.1/
-              workplaceHomepage",
-      "@type": "@id"
-    },
-    "Person": "http://xmlns.com/foaf/0.1/Person"
-  },
-  "@id": "http://me.markus-lanthaler.com",
-  "@type": "Person",
-  "name": "Markus Lanthaler",
-  "homepage": "http://www.tugraz.at/"
-}
-\end{minted}
-\end{itemize}
-\end{column}
-\end{columns}
+\begin{frame}
+  \frametitle{Data sources}
 \end{frame}
+
+\end{document}
 
 \begin{frame}[fragile]
 \frametitle{Resource storage and access}
