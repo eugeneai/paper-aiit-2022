@@ -7,6 +7,7 @@
 \usepackage{anyfontsize}
 \usepackage{minted}
 \usepackage{alltt}
+\usepackage{fontawesome}
 
 \usemintedstyle{tango}
 \newcommand{\ltprgsize}{\fontsize{5}{5}\selectfont}
@@ -16,6 +17,14 @@
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{colorISU}{RGB}{64,91,171}
+\definecolor{blockhead1}{RGB}{201,187,245}
+\definecolor{blockbody1}{RGB}{233,227,248}
+\definecolor{blockhead2}{RGB}{255,202,154}
+\definecolor{blockbody2}{RGB}{253,231,211}
+\definecolor{blockhead3}{RGB}{169,186,239}
+\definecolor{blockbody3}{RGB}{216,224,248}
+
 
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
@@ -297,6 +306,86 @@ list_separator(Separator):-
 \end{frame}
 
 
+\begin{frame}
+\frametitle{``ISU Schedule'' Functions}
+``ISU Schedule'' is a web-application has the following functions:
+    \begin{itemize}
+    \item[\faCogs] accounting main features of ISU institutions, such as:
+        \begin{itemize}
+            \item different timetables,
+            \item periodicity of classes;
+            \item time spending for classes variety.
+        \end{itemize}
+        \item[\faEdit] editing of the education timetables for mural and extramural groups;
+        \item[\faSearch] printing schedules for a auditorium, course, faculty member, and student group;
+        \item[\faUserPlus] register a user;
+        \item[\faBirthdayCake] input holiday dates;
+        \item[\faDownload] load data from ``1С:University'';
+        \item[\faTable] schedule compilation with a genetic algorithm.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Administration panel}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{img/panelAdmin.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{A schedule view}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{img/viewSchedule.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Editing mode functions}
+
+        \begin{enumerate}
+            \item Adding classes for, a date, a time period, define periodicity.
+            \item Update class data:
+            \begin{itemize}
+                \item shifting a class to another day of week or a time period;
+                \item changing the auditorium;
+                \item assigning other teacher.
+            \end{itemize}
+            \item Removing or cancellation of a class.
+        \end{enumerate}
+\end{frame}
+\begin{frame}
+  \frametitle{Genetic algorithm}
+
+  The genetic algorithm constructs a schedule for an institute, accounting
+    \begin{itemize}
+    \item teacher day load;
+    \item the capacity of auditoriums;
+    \item disabling gaps for student groups and faculty.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Program execution examle}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{img/geneticAlgorithm.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Program performance}
+
+    \begin{itemize}
+        \item For 30 student groups of IMIT, ISU
+        \item Near optimal solution is obtained for 5000 iterations (40 minutes)
+    \end{itemize}
+\end{frame}
 
 
 \begin{frame}
