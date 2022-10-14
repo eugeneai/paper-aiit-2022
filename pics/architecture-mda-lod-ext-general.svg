@@ -5,7 +5,7 @@
    viewBox="0 0 210.64048 193.81878"
    version="1.1"
    id="svg8"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
    sodipodi:docname="architecture-mda-lod-ext-general.svg"
    inkscape:export-filename="/home/eugeneai/Development/text/Papers/paper-zont-2017/architecture.svg.png"
    inkscape:export-xdpi="120.09048"
@@ -366,16 +366,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0649319"
-     inkscape:cx="221.1409"
-     inkscape:cy="-52.585522"
+     inkscape:zoom="1.5060411"
+     inkscape:cx="500.65034"
+     inkscape:cy="58.763335"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:window-width="1395"
-     inkscape:window-height="2137"
-     inkscape:window-x="1221"
-     inkscape:window-y="21"
+     inkscape:window-width="1536"
+     inkscape:window-height="2136"
+     inkscape:window-x="1152"
+     inkscape:window-y="24"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
      fit-margin-top="1"
@@ -386,7 +386,9 @@
      inkscape:document-rotation="0"
      inkscape:lockguides="false"
      lock-margins="true"
-     inkscape:pagecheckerboard="0" />
+     inkscape:pagecheckerboard="0"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -1299,7 +1301,7 @@
          x="127.86108"
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.264583px"
-         id="tspan238">ClioPatria</tspan></text>
+         id="tspan238" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1490,12 +1492,12 @@
     </g>
     <g
        id="g4232"
-       transform="matrix(0.99705014,0,0,1,72.981009,-63.6442)"
-       style="fill:none;stroke-width:1.00148">
+       transform="matrix(0.98477695,0,0,1,73.367849,-63.6442)"
+       style="fill:none;stroke-width:1.0077">
       <g
          id="g4683-7"
-         style="fill:none;stroke-width:1.00148"
-         transform="translate(0.8611116,-2.283965)">
+         style="fill:none;stroke-width:1.02375"
+         transform="matrix(0.96889925,0,0,1,2.8822975,-2.283965)">
         <rect
            ry="0.76467633"
            y="59.057838"
@@ -1503,41 +1505,41 @@
            height="21"
            width="24"
            id="rect6572-4"
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.500739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.511873;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
         <text
            id="text6578-5"
            y="68.741226"
            x="77.058739"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264974px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.270865px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            xml:space="preserve"><tspan
              id="tspan970-2"
              y="68.741226"
              x="77.058739"
              sodipodi:role="line"
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px">Template</tspan><tspan
+             style="fill:#000000;fill-opacity:1;stroke-width:0.270865px">Template</tspan><tspan
              id="tspan3992"
              y="72.741226"
              x="77.058739"
              sodipodi:role="line"
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px">loader</tspan></text>
+             style="fill:#000000;fill-opacity:1;stroke-width:0.270865px">loader</tspan></text>
       </g>
       <g
          id="g2197-5"
          transform="translate(-9.7157863,43.763738)"
-         style="fill:none;stroke-width:1.00148">
+         style="fill:none;stroke-width:1.0077">
         <text
            id="text2193-4"
            y="51.876076"
            x="55.234356"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264974px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            xml:space="preserve"><tspan
              id="tspan1174-7"
              y="51.876076"
              x="55.234356"
              sodipodi:role="line"
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px">Document</tspan></text>
+             style="fill:#000000;fill-opacity:1;stroke-width:0.26662px">Document</tspan></text>
         <rect
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.701035;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.80414, 2.80414;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.70539;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.82156, 2.82156;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
            id="rect2195-4"
            width="24"
            height="21"
@@ -1552,28 +1554,29 @@
          height="56.390385"
          width="60.569054"
          id="rect4633-8-4"
-         style="opacity:1;fill:none;fill-opacity:0.128099;stroke:#000000;stroke-width:0.610517;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:none;fill-opacity:0.128099;stroke:#000000;stroke-width:0.61431;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <text
          id="text3792-6-3"
          y="109.30151"
          x="34.661163"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264974px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="109.30151"
            x="34.661163"
            sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264974px"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.26662px"
            id="tspan3788-7-0">Authoring tool (Browser)</tspan><tspan
            y="113.30151"
            x="34.661163"
            sodipodi:role="line"
-           id="tspan3790-5-7" /></text>
+           id="tspan3790-5-7"
+           style="stroke-width:0.26662px" /></text>
       <g
          transform="translate(-31.477532,-2.283965)"
          id="g4691-8"
-         style="fill:none;stroke-width:1.00148">
+         style="fill:none;stroke-width:1.0077">
         <rect
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.500739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.50385;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4685-6"
            width="24"
            height="21"
@@ -1582,27 +1585,27 @@
            ry="0.76467633" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264974px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="76.923515"
            y="68.439781"
            id="text4689-8"><tspan
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px"
+             style="fill:#000000;fill-opacity:1;stroke-width:0.26662px"
              sodipodi:role="line"
              x="76.923515"
              y="68.439781"
              id="tspan4687-8">Edit mode</tspan><tspan
              id="tspan4003"
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px"
+             style="fill:#000000;fill-opacity:1;stroke-width:0.26662px"
              sodipodi:role="line"
              x="76.923515"
              y="72.439781">switching</tspan></text>
       </g>
       <g
-         transform="translate(0.8611116,25.083997)"
+         transform="matrix(0.9692795,0,0,1,2.8575856,25.083997)"
          id="g4699-4"
-         style="fill:none;stroke-width:1.00148">
+         style="fill:none;stroke-width:1.02354">
         <rect
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.500739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.511772;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            id="rect4693-3"
            width="24"
            height="21"
@@ -1611,22 +1614,22 @@
            ry="0.76467633" />
         <text
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264974px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:4px;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.270812px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="76.957108"
            y="66.65596"
            id="text4697-1"><tspan
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px"
+             style="fill:#000000;fill-opacity:1;stroke-width:0.270812px"
              sodipodi:role="line"
              x="76.957108"
              y="66.65596"
              id="tspan4695-4">Patterm-</tspan><tspan
              id="tspan3994"
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px"
+             style="fill:#000000;fill-opacity:1;stroke-width:0.270812px"
              sodipodi:role="line"
              x="76.957108"
              y="70.65596">directed </tspan><tspan
              id="tspan3996"
-             style="fill:#000000;fill-opacity:1;stroke-width:0.264974px"
+             style="fill:#000000;fill-opacity:1;stroke-width:0.270812px"
              sodipodi:role="line"
              x="76.957108"
              y="74.65596">inference</tspan></text>
@@ -1636,9 +1639,9 @@
          inkscape:connector-curvature="0"
          id="path5048-9"
          d="M 57.841389,94.641834 H 65.58946"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.500739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.50385;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <path
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.500739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.50385;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          d="m 57.69086,67.273874 h 7.736201"
          id="path5050-2"
          inkscape:connector-curvature="0"
@@ -1648,9 +1651,9 @@
          inkscape:connector-curvature="0"
          id="path5052-0"
          d="m 77.847504,77.929719 v 5.83509"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.500739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.50385;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <path
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.500739;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.50385;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          d="m 45.508857,77.999016 v 5.916357"
          id="path5054-6"
          inkscape:connector-curvature="0"
@@ -1677,7 +1680,7 @@
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
        id="path4624"
-       d="m 164.71644,6.3743329 h 7.38227"
+       d="m 164.35382,6.3743327 h 7.73301"
        style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cc"

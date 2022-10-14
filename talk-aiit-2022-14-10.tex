@@ -141,57 +141,57 @@ Zrenjanin, Serbia}
 \frametitle{Research and Development objectives}
 Irkutsk state university (ISU) has quite normal (required) level of automation in the areas of
 \begin{itemize}
-\item accounting (``1C:Accounting for budget institutions''),
-\item education process planning (``1C:University''),
+\item accounting (``1C:Accounting for budget institutions'')
+\item education process planning (``1C:University'')
 \item learning management, student state control (``Moodle'')
-\item library data access with library information system (LMS ``Irbis-64'').
+\item library data access with library information system (LMS ``Irbis-64'')
 \end{itemize}
 \textbf{BUT} other problems' automation has an \textbf{island character}.
 \begin{itemize}
-\item institutes of ISU develop software for local purposes,
-\item do not share results between ISU community;
-\item some solutions are implemented by a subdepartment IMIT of ISU on a request.
+\item institutes of ISU develop software for local purposes
+\item do not share results between ISU community
+\item some solutions are implemented by a subdepartment IMIT of ISU on a request
 \end{itemize}
-\textbf{Main objective} of the present research  is to creative activities of the faculty
+\textbf{Main objective} of the present research is to creative activities of the faculty
 \begin{itemize}
 \item authoring syllabi,
-\item organizing processes, monitoring and control,
+\item organizing processes, monitoring and control
 \item form a basis of educational process modeling to support the
   \begin{itemize}
-  \item ministry requirements compliance checking,
-  \item compliance to domain of courses,
-  \item individual education trajectories of students.
+  \item ministry requirements compliance checking
+  \item compliance to domain of courses
+  \item individual education trajectories of students
   \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Syllabi authoring}
-One of the challenging problem is course documentation, such as syllabi, mediation the previous version with the current curriculum.  For a syllabi, following steps are to be performed:
+One of the challenging problem is course documentation, such as syllabi, mediation the previous version with the current curriculum.  For syllabi, following steps are to be performed:
 \begin{enumerate}
-\item Find a syllabus source at user's PC,
-\item Analyze actual curriculum, and find education unit (EU) distribution data, print/write it down,
-\item Recall the scenario of course teaching, add/remove/\textbf{comment} topics and laboratory work (LW) task set,
-\item Reconcile topics LW with exams question set an the set of competence,
-\item Fill in the results in the current template, upload \textbf{DOCX} to institute's cloud storage.
+\item Find a syllabus source at user's PC
+\item Analyze actual curriculum, and find education unit (EU) distribution data, print/write it down
+\item Recall the scenario of course teaching, add/remove/\textbf{comment} topics and laboratory work (LW) task set
+\item Reconcile topics LW with exams question set and the set of competence
+\item Fill in the results in the current template, upload \textbf{DOCX} to institute's cloud storage
 \end{enumerate}
 
-As faculty varies, set of courses varies, EU distribution varies, \ldots, sources lost. We have to do with this!
+Faculty member set varies, set of courses varies, EU distribution varies, \ldots, sources lost. % We have to do with this!
 
-\textbf{Long term result is} a model of the education process.
+% \textbf{Long term result is} a model of the education process.
 \end{frame}
 
 \begin{frame}
   \frametitle{Schedule compilation and student progress monitoring}
-  Class scheduling and student progress monitoring have many aspects of consideration,
+  Class scheduling and student progress monitoring have many aspects of consideration
   \begin{itemize}
-  \item a classic combinatorial optimization constraint satisfaction problem,
-  \item integration with education process planning software (``1C:University''),
-  \item Reconciling with other institutions occupying the same resources,
-  \item Accounting faculty requests and students' load,
+  \item a classic combinatorial optimization constraint satisfaction problem
+  \item integration with education process planning software (``1C:University'')
+  \item Reconciling with other institutions occupying the same resources
+  \item Accounting faculty requests and students' load
   \end{itemize}
-\vfil
-  \textbf{Long term result is} a model of the education process.
+\vfill
+  \textbf{Long term result} would be a \textbf{model of the education process}.
 
   % Data representation for students'
   % \begin{itemize}
@@ -204,19 +204,19 @@ As faculty varies, set of courses varies, EU distribution varies, \ldots, source
 
 \begin{frame}
   \frametitle{Assets, requirements}
-  The problem set
+  The problem set is as follows:
   \begin{itemize}
-  \item Syllabi published on ISU web site for the active students' groups,
-  \item Educational, industrial standards on the government site (some of them just image scans),
-  \item Document templates produced by institute management staff,
-  \item Data of the developed applications.
+  \item Syllabi published on ISU website for the active students' groups
+  \item Educational, industrial standards on the government site (some of them just image scans)
+  \item Document templates produced by institute management staff
+  \item Data of the developed applications
   \end{itemize}
-  So, at the firs stages we deal with information acquisition and analysis to reach a reasonable level of formalization.  This results to the following general requirements:
+  At the first stage, we deal with information acquisition and analysis to reach a reasonable level of formalization.  This results to the following general requirements:
   \begin{enumerate}
-  \item Allow loose coupling between application (agents) and independent development,
-  \item Store data with metadata to form a standardized level of application interaction,
-  \item Respect users' day-to-day way of task solution (principle of least surprise),
-  \item Use perspective information technologies.
+  \item Allow loose coupling between application (agents) and independent development
+  \item Store data with metadata to form a standardized level of application interaction
+  \item Respect users' day-to-day way of task solution (principle of the least surprise)
+  \item Use perspective information technologies
   \end{enumerate}
 
 \end{frame}
@@ -269,42 +269,98 @@ For the Knowledge Graphs (KG), the following is of interest.
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Logtalk Categories PLACEHOLDER}
-  A category of named entities
-\begin{minted}[fontsize=\scriptsize]{logtalk}
-:- category(named).
-:- public([name/1, render/1]).
-:- protected([renderitem/2]).
-name(Name):- ::prepend(name(Name)).
-renderitem(name(Name), String):-!, atom_string(Name, String).
-render(String):-  % What is code generation from items
-    ::item(name(Name)), ::renderitem(name(Name), String).
-:-end_category.
-\end{minted}
-Category of named and typed entities
-\begin{minted}[fontsize=\scriptsize]{logtalk}
-:- category(namedtyped, extends(named)).
-:- public([type/1,render/2, separator_option/2,list_separator/1]).
-:- protected([renderitem/2]).
-type(Type):- ::append(type(Type)).
-renderitem(Item, String):- ^^renderitem(Item, String),!.
-renderitem(type(Type),String):-!, ::list_separator(Separator),
-    writef::swritef(String, '%w%w', [Separator, Type]).
-render(Middle, String):- ^^render(SName),
-    (   ::item(type(Type)) ->
-        ::renderitem(type(Type), SType),
-        string_concat(SName, Middle, _1),
-        string_concat(_1, SType, String) ;
-        SName = String  ).
-render(String):-  ::render("", String).
-list_separator(Separator):-
-    ::separator_option(Name, Default),!, % Global options
-    root::option(Name, Separator, Default).
-:- end_category.
+  \frametitle{Syllabi PDF analysis}
+  Meaningful information is the title and the code of the course, list of topics, distribution of study units (academic hours) between lectures, practice, seminars, personal work of student, list of questions for knowledge assessment, tests, \emph{etc}.
+  \begin{enumerate}
+  \item Convert PDF to XML by \texttt{Poppler}'s \texttt{pdftohtml -s -c -xml}
+  \item XML is converted to in-object database of ordered \texttt{elements/5}
+  \item Text bounding box by non-empty runs, excluding page numbers
+  \item Line, run, font, page features assessment (indent, tail, numbers, \ldots) \label{cyb}
+  \item Join runs in lines, lines in paragraphs, removing page breaks \label{cen}
+  \item Recognition of sectioning, association of paragraph to sections
+  \item Join and fold lists, assuming bullet lists have deeper level
+  \item Data acquisition respecting sectioning, store them in a KG and an HTML file
+  \end{enumerate}
+  Steps \ref{cyb} and \ref{cen} are repeated until no joins were performed.\\[0.1em]
 
+  Recognized KG data are filled in a Lua\LaTeX{} template using an MVC framework.
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Structure recognition}
+  \begin{center}
+    \includegraphics[width=0.8\linewidth]{paragraph-recognition.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Syllabi recognition scenario for IMIT, ISU}
+\begin{minted}{logtalk}
+:- object(syllabus_recognizer(_XML_, _HTML_File_Name_, _Document_IRI_),
+          extends(as_db(_XML_)),  % A parametric object
+          imports([syllabus_fonts, text_attrib, degraded, text_features,
+                   syllabus_merge, text_syllabus_sections, gather_items,
+                   syllabus_page_one, text_syllabus_fields, grouping,
+                   htmlize])).    % Importing categories
+   % . . . . . . . . . . . . .
+   % Configuration parameters of the recognizer
+   deviation(attributes, [10, 50]).    % tolerances
+   deviation(paragraph, [50, 10]).     %
+   deviation(parindent, [28]).         % 1 cm = 28 pt
+   deviation(itemtextminlength, [10]). % The length of a "minimal item text".
+   :- public(process/0).               % public predicate
+   :- info(process/0, [ comment is 'Run all rules in an order' ]).
+   process :-
+      ::process_syllabus_fonts, !, ::process_attrs, !,
+      ::process_degraded, !,       ::process_runs_merge, !,
+      ::process_features, !,       ::process_merge, !,
+      ::process_features, !,       ::process_merge, !,
+      ::process_first_page, !,     ::process_syllabus_sections, !,
+      ::process_item_gathering, !, ::process_merge, !,
+      ::process_syllabus_fields, !,::process_grouping(ul), !,
+      ::process_merge, !,          ::htmlize(_HTML_File_Name_, _Document_IRI_),
+      !.
+:- end_object.
 \end{minted}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Extending line-joining category}
+\begin{minted}{logtalk}
+:- category(syllabus_merge, extends(text_merge)).
+    :- protected(lines_mergable/2).
+    lines_mergable(A, B) :-  % Try to use default rules
+        ^^lines_mergable(A, B), !. % Parent category predicate call
+    lines_mergable(element(_, _, text, _, S1), element(_, _, text, _, S2)) :-
+        ::gettext(S1, T1),    ::unterminated_sentence(T1),
+        ::gettext(S2, T2),    ::cannot_start_sentence(T2), !.
+    lines_mergable(element(_, _, text, A, _),  element(_, _, text, _, S2)) :-
+        ::list_item(A),       ::gettext(S2, T2),
+        ::cannot_start_sentence(T2), !.
+    % . . . . . . .
+    :- protected(unterminated_sentence/1).
+    unterminated_sentence(T) :-
+        re_match("[-/+=–—]\s*$", T, []).
+    unterminated_sentence(T) :-
+        string_lower(T, L),   re_match("url\s*:\s*$", L, []).
+    % . . . . . . .
+    :- protected(cannot_start_sentence/1).
+    cannot_start_sentence(T) :-
+        re_matchsub("^\s*[а-я]+\s*([):]?)", T, Dict, []),
+        get_dict(1, Dict, ""), !.
+    % . . . . . . .
+:- end_category.
+\end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Result}
+  \begin{center}
+    \includegraphics[width=\linewidth]{recognition-result.png}
+  \end{center}
+  For the \textbf{title} and \textbf{topics}, structures of KG graph are created, as well as \textbf{relations between them}, accounting contexts.
+\end{frame}
 
 \begin{frame}
 \frametitle{``ISU Schedule'' Functions}
@@ -312,16 +368,16 @@ list_separator(Separator):-
     \begin{itemize}
     \item[\faCogs] accounting main features of ISU institutions, such as:
         \begin{itemize}
-            \item different timetables,
-            \item periodicity of classes;
-            \item time spending for classes variety.
+            \item different timetables
+            \item periodicity of classes
+            \item time spending for classes variety
         \end{itemize}
-        \item[\faEdit] editing of the education timetables for mural and extramural groups;
-        \item[\faSearch] printing schedules for a auditorium, course, faculty member, and student group;
-        \item[\faUserPlus] register a user;
-        \item[\faBirthdayCake] input holiday dates;
-        \item[\faDownload] load data from ``1С:University'';
-        \item[\faTable] schedule compilation with a genetic algorithm.
+        \item[\faEdit] editing of the education timetables for mural and extramural groups
+        \item[\faSearch] printing schedules for an auditorium, course, faculty member, and student group
+        \item[\faUserPlus] register a user
+        \item[\faBirthdayCake] input holiday dates
+        \item[\faDownload] load data from ``1С:University''
+        \item[\faTable] schedule compilation with a genetic algorithm
     \end{itemize}
 
 \end{frame}
@@ -344,34 +400,35 @@ list_separator(Separator):-
 \end{frame}
 
 \begin{frame}
-    \frametitle{Editing mode functions}
-
+    \frametitle{Main program features}
+    \textbf{Editing mode functions}
         \begin{enumerate}
-            \item Adding classes for, a date, a time period, define periodicity.
+            \item Adding classes for, a date, a time period, define periodicity
             \item Update class data:
             \begin{itemize}
-                \item shifting a class to another day of week or a time period;
-                \item changing the auditorium;
-                \item assigning other teacher.
+                \item shifting a class to another day of week or a time period
+                \item changing the auditorium
+                \item assigning other teacher
             \end{itemize}
-            \item Removing or cancellation of a class.
+            \item Removing or cancellation of a class
         \end{enumerate}
-\end{frame}
-\begin{frame}
-  \frametitle{Genetic algorithm}
-
-  The genetic algorithm constructs a schedule for an institute, accounting
+  \textbf{Genetic algorithm} constructs a schedule for an institute, accounting
     \begin{itemize}
-    \item teacher day load;
-    \item the capacity of auditoriums;
-    \item disabling gaps for student groups and faculty.
+    \item teacher day load
+    \item the capacity of auditoriums
+    \item disabling gaps for student groups and faculty
+    \end{itemize}
+    \textbf{Program performance}
+
+    \begin{itemize}
+        \item[] For 30 student groups of IMIT, ISU
+        \item An acceptable solution is obtained for 5000 iterations (40 minutes)
     \end{itemize}
 
 \end{frame}
 
 \begin{frame}
-    \frametitle{Program execution examle}
-
+    \frametitle{A program execution result}
     \begin{figure}[h!]
         \centering
         \includegraphics[width=1\textwidth]{img/geneticAlgorithm.png}
@@ -379,29 +436,19 @@ list_separator(Separator):-
 \end{frame}
 
 \begin{frame}
-    \frametitle{Program performance}
-
-    \begin{itemize}
-        \item For 30 student groups of IMIT, ISU
-        \item Near optimal solution is obtained for 5000 iterations (40 minutes)
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}
   \frametitle{Conclusion}
   This is a progress report of R\&D of a Knowledge Graph based architecture and infrastructure for automation of creative activity of a faculty.  The following results were obtained:
   \begin{enumerate}
-  \item Raw domain analysis, including, problem space,
-  \item Existing software and data source accounting,
+  \item Raw domain analysis, including, problem space
+  \item Existing software and data source accounting
   \item Realized MVP-like utilities providing solutions of new problems
     \begin{itemize}
-    \item Knowledge Graph (KG) component infrastructure is being organized,
-    \item Analyzing PDF-exported versions of syllabi by a Logtalk knowledge-based system,
-    \item Collecting data from the syllabi documents an store in KG,
-    \item Implementing verification software for parts of a syllabi,
-    \item Document authoring tools are being implemented using generative approaches,
-    \item Techniques of Linked Open Data and standard vocabularies usage is being formalized.
+    \item Knowledge Graph (KG) component infrastructure is being organized
+    \item Analyzing PDF-exported versions of syllabi by a Logtalk knowledge-based system
+    \item Collecting data from the syllabi documents and store in KG
+    \item Implementing verification software for parts of a syllabi
+    \item Document authoring tools are being implemented using generative approaches
+    \item Techniques of Linked Open Data and standard vocabularies' usage is being formalized
     \end{itemize}
   \end{enumerate}
 \end{frame}
