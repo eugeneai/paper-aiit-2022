@@ -154,7 +154,7 @@ Irkutsk state university (ISU) has quite normal (required) level of automation i
 \end{itemize}
 \textbf{Main objective} of the present research is to creative activities of the faculty
 \begin{itemize}
-\item authoring syllabi,
+\item authoring syllab,
 \item organizing processes, monitoring and control
 \item form a basis of educational process modeling to support the
   \begin{itemize}
@@ -166,11 +166,11 @@ Irkutsk state university (ISU) has quite normal (required) level of automation i
 \end{frame}
 
 \begin{frame}
-\frametitle{Syllabi authoring}
-One of the challenging problem is course documentation, such as syllabi, mediation the previous version with the current curriculum.  For syllabi, following steps are to be performed:
+\frametitle{Course plan authoring}
+One of the challenging problem is course documentation, such as CPs, mediation the previous version with the pan of education (EP).  For CPs, following steps are to be performed:
 \begin{enumerate}
-\item Find a syllabus source at user's PC
-\item Analyze actual curriculum, and find education unit (EU) distribution data, print/write it down
+\item Find a CP source at user's PC
+\item Analyze actual EP, and find education unit (EU) distribution data, print/write it down
 \item Recall the scenario of course teaching, add/remove/\textbf{comment} topics and laboratory work (LW) task set
 \item Reconcile topics LW with exams question set and the set of competence
 \item Fill in the results in the current template, upload \textbf{DOCX} to institute's cloud storage
@@ -206,7 +206,7 @@ Faculty member set varies, set of courses varies, EU distribution varies, \ldots
   \frametitle{Assets, requirements}
   The problem set is as follows:
   \begin{itemize}
-  \item Syllabi published on ISU website for the active students' groups
+  \item CPs published on ISU website for the active students' groups
   \item Educational, industrial standards on the government site (some of them just image scans)
   \item Document templates produced by institute management staff
   \item Data of the developed applications
@@ -269,7 +269,7 @@ For the Knowledge Graphs (KG), the following is of interest.
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Syllabi PDF analysis}
+  \frametitle{CPs PDF analysis}
   Meaningful information is the title and the code of the course, list of topics, distribution of study units (academic hours) between lectures, practice, seminars, personal work of student, list of questions for knowledge assessment, tests, \emph{etc}.
   \begin{enumerate}
   \item Convert PDF to XML by \texttt{Poppler}'s \texttt{pdftohtml -s -c -xml}
@@ -295,13 +295,13 @@ For the Knowledge Graphs (KG), the following is of interest.
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Syllabi recognition scenario for IMIT, ISU}
+  \frametitle{CPs recognition scenario for IMIT, ISU}
 \begin{minted}{logtalk}
-:- object(syllabus_recognizer(_XML_, _HTML_File_Name_, _Document_IRI_),
+:- object(CP_recognizer(_XML_, _HTML_File_Name_, _Document_IRI_),
           extends(as_db(_XML_)),  % A parametric object
-          imports([syllabus_fonts, text_attrib, degraded, text_features,
-                   syllabus_merge, text_syllabus_sections, gather_items,
-                   syllabus_page_one, text_syllabus_fields, grouping,
+          imports([CP_fonts, text_attrib, degraded, text_features,
+                   CP_merge, text_CP_sections, gather_items,
+                   CP_page_one, text_CP_fields, grouping,
                    htmlize])).    % Importing categories
    % . . . . . . . . . . . . .
    % Configuration parameters of the recognizer
@@ -312,13 +312,13 @@ For the Knowledge Graphs (KG), the following is of interest.
    :- public(process/0).               % public predicate
    :- info(process/0, [ comment is 'Run all rules in an order' ]).
    process :-
-      ::process_syllabus_fonts, !, ::process_attrs, !,
+      ::process_CP_fonts, !, ::process_attrs, !,
       ::process_degraded, !,       ::process_runs_merge, !,
       ::process_features, !,       ::process_merge, !,
       ::process_features, !,       ::process_merge, !,
-      ::process_first_page, !,     ::process_syllabus_sections, !,
+      ::process_first_page, !,     ::process_CP_sections, !,
       ::process_item_gathering, !, ::process_merge, !,
-      ::process_syllabus_fields, !,::process_grouping(ul), !,
+      ::process_CP_fields, !,::process_grouping(ul), !,
       ::process_merge, !,          ::htmlize(_HTML_File_Name_, _Document_IRI_),
       !.
 :- end_object.
@@ -328,7 +328,7 @@ For the Knowledge Graphs (KG), the following is of interest.
 \begin{frame}[fragile]
   \frametitle{Extending line-joining category}
 \begin{minted}{logtalk}
-:- category(syllabus_merge, extends(text_merge)).
+:- category(CP_merge, extends(text_merge)).
     :- protected(lines_mergable/2).
     lines_mergable(A, B) :-  % Try to use default rules
         ^^lines_mergable(A, B), !. % Parent category predicate call
@@ -444,9 +444,9 @@ For the Knowledge Graphs (KG), the following is of interest.
   \item Realized MVP-like utilities providing solutions of new problems
     \begin{itemize}
     \item Knowledge Graph (KG) component infrastructure is being organized
-    \item Analyzing PDF-exported versions of syllabi by a Logtalk knowledge-based system
-    \item Collecting data from the syllabi documents and store in KG
-    \item Implementing verification software for parts of a syllabi
+    \item Analyzing PDF-exported versions of CPs by a Logtalk knowledge-based system
+    \item Collecting data from the CPs documents and store in KG
+    \item Implementing verification software for parts of CP
     \item Document authoring tools are being implemented using generative approaches
     \item Techniques of Linked Open Data and standard vocabularies' usage is being formalized
     \end{itemize}
