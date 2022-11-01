@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="113.91203mm"
+   height="81.544243mm"
+   viewBox="0 0 113.91203 81.544243"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   sodipodi:docname="ai-directions-ru.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.3518107"
+     inkscape:cx="215.6367"
+     inkscape:cy="154.23757"
+     inkscape:window-width="1430"
+     inkscape:window-height="2136"
+     inkscape:window-x="1205"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g980" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow2"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow2"
+       markerWidth="7.6999998"
+       markerHeight="5.5999999"
+       viewBox="0 0 7.7 5.6"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="arrow2L" />
+    </marker>
+    <rect
+       x="96.484665"
+       y="368.07462"
+       width="481.57251"
+       height="373.24548"
+       id="rect860" />
+  </defs>
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-29.671354,-106.33547)">
+    <g
+       id="g980">
+      <text
+         xml:space="preserve"
+         style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';letter-spacing:0px;word-spacing:0px;fill:#316a00;fill-opacity:1;stroke-width:0.265;stroke-dasharray:none"
+         x="81.503624"
+         y="150.07092"
+         id="text790"><tspan
+           sodipodi:role="line"
+           id="tspan788"
+           style="fill:#316a00;fill-opacity:1;stroke-width:0.265;stroke-dasharray:none"
+           x="81.503624"
+           y="150.07092">ИИ</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.264583"
+         x="87.212982"
+         y="111.27436"
+         id="text794"><tspan
+           sodipodi:role="line"
+           id="tspan792"
+           style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+           x="87.212982"
+           y="111.27436">Моделирование функционирования</tspan><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+           x="87.212982"
+           y="120.09381"
+           id="tspan852">(моделирование рассуждений)</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.264583"
+         x="87.269424"
+         y="177.50804"
+         id="text848"><tspan
+           sodipodi:role="line"
+           id="tspan846"
+           style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+           x="87.269424"
+           y="177.50804">Моделирование природных структур </tspan><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+           x="87.269424"
+           y="186.32748"
+           id="tspan850">(мозг, сообщества животных)</tspan></text>
+      <path
+         style="fill:none;stroke:#1e58a1;stroke-width:0.999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2)"
+         d="m 86.85289,124.29087 c -0.539172,7.85186 -0.272006,11.52461 -0.272006,11.52461"
+         id="path1045"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#1e58a1;stroke-width:0.999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2)"
+         d="M 84.221432,171.83789 85.343214,158.3979"
+         id="path1047"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text858"
+       style="font-size:26.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect860)" />
+  </g>
+</svg>
