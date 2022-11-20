@@ -164,69 +164,65 @@
 Данные РПД, хранящиеся в ГЗ, помещаются в \LuaLaTeX{} шаблон, реализованный с использованием специального \LaTeX{} класса \verb|sucourse|, подкласс KOMA-скрипта \verb|scrartcl|.  В классе \verb|sucourse| реализованы специальные команды и блоки (environment) для определения распределения учебных единиц между лекциями, практиками и т.п. при помощи ключевых слов. Рассмотрим пример формирования перечня лабораторных работ, выраженных специальными \LaTeX{} блоками.
 
 \begin{minted}{latex}
-\begin{labworks}[comp={PC-4,PC-12}] % A ``default'' competence codes satisfied by these
-                                    % set of laboratory works.
-. . .                               % The previous problem definitions
-\begin{work}[comp={PC-4}, % a competence satisfied by this work
-    hours=16,             % academic hours assigned for the task
-    topics={4},           % Lecture topic for the work
-    label=lw:distr]       % A LaTeX Reference \label...
-    {Construction of a distributed computational system} % The title of the work
-\paragraph{Problem definition:} Implement a cluster-based data processing according
-to ``Map-reduce'' scheme.
-\paragraph{Given} the results of the previous laboratory works.
-\paragraph{Devise} a network of interconnected services realizing data flow processing.
-\paragraph{Advanced level:} Organize a flow control with a RabbitMQ server.
+\begin{labworks}[comp={PC-4,PC-12}] % Компетенции по умолчанию,
+                          % удовлетворяемые перечнем лабораторных работ.
+. . .                     % Предыдущие лабораторные работы
+\begin{work}[comp={PC-4}, % компетенции данной лабороторной работы
+    hours=16,             % количество академических часов на работу
+    topics={4},           % Набор лекций с материалом для работы
+    label=lw:distr]       % Ссылки в терминологии LaTeX \label...
+    {Construction of a distributed computational system}
+                          % Название лабораторной работы
+    \paragraph{Problem definition:}Реализовать среду обработки данных
+       типа <<Map-Reduce>> в горизонтальном кластере.
+    \paragraph{Дано} результаты предыдущих лабораторных работ.
+    \paragraph{Разработать} сеть взаимодействующих сервисов,
+       реализующих потоковую (dataflow) архитектуру обработки информации.
+    \paragraph{Дополнительное задание} Организовать управление вычислениями
+       при помощи сервера RabbitMQ.
 \end{work}
 \end{labworks}
 \end{minted}
 
-% A ``default'' competence codes satisfied by these% set of laboratory works.
-%%%% . . . \begin{work}[comp={PC-4}, hours=16, topics={4}, label=lw:distr] {Построение распределенной вычислительной среды} \paragraph{Задача:} Реализовать среду обработки данных типа <<Map-Reduce>> в горизонтальном кластере. \paragraph{Дано} результаты предыдущих лабораторных работ. \paragraph{Разработать} сеть взаимодействующих сервисов, реализующих потоковую (dataflow) архитектуру обработки информации. \paragraph{Дополнительное задание} Организовать управление вычислениями при помощи сервера RabbitMQ. \end{work} \end{labworks} \end{minted}
-
-%%%% The previous problem definitions% a competence satisfied by this work% academic hours assigned for the task% Lecture topic for the work% A LaTeX Reference \label...% The title of the work
-
 Например, лабораторные работы определяются двумя блоками \verb|labworks|, настраивающим блок перечисления лабораторных работ и контекст RDF для сбора данных СВ, \verb|work|, задающим конкретную задачу. Функции блоков определяется так называемым новым \LaTeX{} расширенным синтаксисом \LaTeX2e, позволяющим программисту управлять типами параметров определяемых структурных элементов. Текущая альфа-версия класса \verb|sucourse| опубликована на сайте Github \cite{ghs}.
 
 \begin{minted}{latex}
-\NewDocumentEnvironment{works}{O{}} % An extended synax environment definition with keywords
-{ % Rexecutes at \begin{...work}
-  \def\itemname{Student work} % A ``Student work'' tile placeholder
-  \begin{syll@items}[#1]  % Processing keywords by a private environment
-  \begin{rdfctx}{\rdfsetctx{list}{syll wpdd:itemList % Semantic web item list definition
+\NewDocumentEnvironment{works}{O{}} % Определение блока в расширенном синтаксисе
+{ % Запускается в точке \begin{...work}
+  \def\itemname{Работа студента} % Заготовка газвания работы студента
+  \begin{syll@items}[#1]  % Обработка ключевых слов
+  \begin{rdfctx}{\rdfsetctx{list}{syll wpdd:itemList % Разметка RDF
        !wpdd:ExampleList !wpdd:CurrentAttestation !wpdd:ItemList}}
-  \def\syllabus@worktype{wpdd:LaboratoryWork} % RDF type of itemsin in an extended Jinja
-}                                             % equation syntax
-{ % Executes at \end{...work}
-  \luadirect{ syll.items:workValidation() } % Run [table] data validation
-\end{rdfctx} % End of a RDF context
-\end{syll@items} % End of parent environment
+  \def\syllabus@worktype{wpdd:LaboratoryWork} % Тип элемента списка в RDF
+}
+{ % Запускается в точке \end{...work}
+  \luadirect{ syll.items:workValidation() } % Запуск проверки табличных данных
+\end{rdfctx} % Конец контекста RDF
+\end{syll@items} % Конец блока
 }
 
-\NewDocumentEnvironment{labworks}{O{}} % Specializes ``works'' environment
+\NewDocumentEnvironment{labworks}{O{}} % Специализация блока ``works''
 {
-\syl@labwork@section % Starts section with name from a template adapter
+\syl@labwork@section % Начать с адаптера общего шаблона РПД
 \begin{works}[totalnames={'hours'},
-  type=labwork,      % A kind of time units to account (labworkd, lectures ...)
-  itemname={Laboratory work},  % Set item naming ``Laboratory work N.''
-  rdftype={LaboratoryWork},#1]}% Set RDF type of items.
+  type=labwork,      % Разновидность академического часа (лекция, лабораторка
+  itemname={Лабораторная работа},  % Задать имя элемента списка
+  rdftype={LaboratoryWork},#1]}% Задать тип RDF для элемента
 {\end{works}}
 
-\NewDocumentEnvironment{work}{O{}m} % Define a work with a mandatory title
+\NewDocumentEnvironment{work}{O{}m} % Задать работу с обязательным заголовком
 {
   \begin{syll@item}[#1]{#2} % Setup item with a parent assets
   \begin{rdfenv}{list ^schema:member !wpdd:ListItem
      !wpdd:Example \luadirect{self.item:sprintRDFTypes()} }
   \paragraph{{\workheaderstyle \itemname\ \theitem.}~{\worktitlestyle #2}}
-     % A format of the beginning of an item.
+     % Формат начала элемента списка
 }
 {
-\end{rdfenv}\par\vspace{1em} % Add an empty line between items
+\end{rdfenv}\par\vspace{1em} % Добавить пустуюстроку между лабораторными
 \end{syll@item}
 }
 \end{minted}
-
-
 
 
 Блоки неявно выполняют \verb|Lua|-код для сбора данных, проверки ограничений и генерации таблиц и других \TeX{} структур РПД. Если логические ограничения не выполняются, в исходный код \TeX{} РПД, транслируемый \LuaLaTeX{}, добавляется сообщение об ошибке в виде текста, окрашенного в красный цвет. Проверку можно отключить при помощи ключевого слова \verb|final| в операторе задания класса \LaTeX"=документа  (ключевое слово \verb|draft| включает отображение результатов проверки целевой PDF, даже если все заполнено правильно). Код Lua также генерирует вспомогательные файлы с данными, обрабатываемими между запусками \verb|lualatex|.
@@ -254,8 +250,10 @@ to ``Map-reduce'' scheme.
 \end{itemize}
 \item для студенческих групп:
 \begin{itemize}
-\item академическая нагрузка (общее количество академических часов по каждой дисциплине, а также количество занятий в неделю); \item количество студентов в группах;
-\item особенности занятий (потоки, факультативы \emph{и т.д.}); \item фамилия, имя и отчество преподавателя для каждой пары;
+\item академическая нагрузка (общее количество академических часов по каждой дисциплине, а также количество занятий в неделю);
+\item количество студентов в группах;
+\item особенности занятий (потоки, факультативы \emph{и т.д.});
+\item фамилия, имя и отчество преподавателя для каждой пары;
 \item желаемый класс для конкретного курса.
 \end{itemize}
 \end{itemize}
