@@ -1,6 +1,7 @@
 # LATEX: pdflatex | xelatex | lualatex
 LATEX = lualatex
-LATEX_FLAGS = -shell-escape -interaction nonstopmode
+# LATEX_FLAGS = -shell-escape -interaction nonstopmode -halt-on-error
+LATEX_FLAGS = -shell-escape -halt-on-error
 BIBTEX = bibtex
 
 FILES = $(patsubst %.tex, %.pdf, $(wildcard *.tex))
